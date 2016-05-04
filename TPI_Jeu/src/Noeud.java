@@ -29,7 +29,11 @@ public class Noeud extends Circle{
     }
 
     public void gererDeplacement(MouseEvent e){
-
+        /*
+        TODO
+        Va afficher un menu qui va présenter les variables à l'utilisateur et lui laisser le choix entre
+        se déplacer sur le noeud ou fermer le menu
+        */
     }
 
     public void gererEnter(MouseEvent e){
