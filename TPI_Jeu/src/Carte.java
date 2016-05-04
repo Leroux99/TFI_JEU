@@ -1,5 +1,4 @@
 import javafx.scene.shape.Line;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,11 +6,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/*********
- * Fichier: Carte
- * Auteur: Jérémie Leroux
- * Date: 2016-05-04
- *********/
 public class Carte {
     List<Noeud> Noeuds = new ArrayList<Noeud>();
     List<Line> LigneChemins = new ArrayList<Line>();

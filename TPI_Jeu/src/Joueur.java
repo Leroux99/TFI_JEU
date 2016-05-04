@@ -1,12 +1,12 @@
-/*********
- * Fichier: Joueur
- * Auteur: Jérémie Leroux
- * Date: 2016-05-04
- *********/
 public class Joueur {
 
+    private int Position_Noeud;
 
-    public void seDeplacer(){
+    Joueur(){
+
+    }
+
+    public void seDeplacer(int Noeud_ID){
 
     }
 

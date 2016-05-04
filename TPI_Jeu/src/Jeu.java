@@ -22,7 +22,6 @@ public class Jeu extends Application{
         private BufferedReader read;
         private PrintWriter write;
 
-
         public void run() {
             try {
                 //connection server
@@ -83,7 +82,6 @@ public class Jeu extends Application{
         stage.show();
 
         Thread t = new Thread(new ContenuNoeuds());
-        // un thread "démon" s'arrêtera avec la fermeture de la fenêtre
         t.setDaemon(true);
         t.start();
     }

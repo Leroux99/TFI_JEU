@@ -2,13 +2,12 @@ import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Noeud extends Circle{
     int ID;
-    Boolean Constructible;
+    public Boolean Constructible;
     public Boolean Troll;
     public Boolean Gobelin;
     public Boolean Or;
