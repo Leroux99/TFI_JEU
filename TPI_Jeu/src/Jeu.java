@@ -2,19 +2,20 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class Jeu extends Application{
+    final static public String ADRESSE_PROF = "149.56.47.97";
+    final static public int PORT_PROF_JOUEURS = 51006;
+    final static public int PORT_PROF_CARTE = 51005;
+
     Carte carte = new Carte();
 
     class ContenuNoeuds implements Runnable{
-        final static private int PORT_PROF = 51006;
-        final static private String ADRESSE_PROF = "149.56.47.97";
-        final static private String SEPARATEUR=" ";
+        final private String SEPARATEUR=" ";
 
         public ArrayList listeContenu=new ArrayList();
         private Socket Serveur_Prof;
@@ -25,7 +26,7 @@ public class Jeu extends Application{
         public void run() {
             try {
                 //connection server
-                Serveur_Prof=new Socket(ADRESSE_PROF,PORT_PROF);
+                Serveur_Prof=new Socket(ADRESSE_PROF, PORT_PROF_JOUEURS);
                 //traiter les envoit du server.
                 read = new BufferedReader(
                         new InputStreamReader(Serveur_Prof.getInputStream()));
@@ -66,7 +67,6 @@ public class Jeu extends Application{
             }
         }
     }
-
 
     @Override
     public void start(Stage stage) {

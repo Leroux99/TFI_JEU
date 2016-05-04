@@ -22,7 +22,7 @@ public class Carte {
         String ligne;
         Boolean isNoeuds = true;
         try {
-            Socket soc = new Socket("149.56.47.97", 51005);
+            Socket soc = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_CARTE);
 
             BufferedReader reader
                     = new BufferedReader(
