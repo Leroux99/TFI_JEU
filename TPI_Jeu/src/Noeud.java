@@ -3,6 +3,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Noeud extends Circle{
     int ID;
     Boolean Constructible;
@@ -12,6 +15,7 @@ public class Noeud extends Circle{
     public Boolean MountainDew;
     public Boolean Doritos;
     public int Joueurs;
+    public List<Integer> Chemins = new ArrayList<Integer>();
 
     Noeud(int ID, int Position_X, int Position_Y, Boolean Constructible){
         super(Position_X, Position_Y, 10, Color.BLACK);

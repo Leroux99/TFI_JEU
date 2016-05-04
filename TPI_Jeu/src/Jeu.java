@@ -72,7 +72,7 @@ public class Jeu extends Application{
     public void start(Stage stage) {
         Group groupe = new Group();
         groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/carte01.png"));
-        groupe.getChildren().addAll(carte.getChemins());
+        groupe.getChildren().addAll(carte.getLigneChemins());
         groupe.getChildren().addAll(carte.getNoeuds());
 
         Scene scene = new Scene(groupe);

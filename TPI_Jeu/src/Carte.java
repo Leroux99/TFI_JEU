@@ -1,3 +1,5 @@
+import javafx.scene.shape.Line;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +14,7 @@ import java.util.List;
  *********/
 public class Carte {
     List<Noeud> Noeuds = new ArrayList<Noeud>();
-    List<Chemin> Chemins = new ArrayList<Chemin>();
+    List<Line> LigneChemins = new ArrayList<Line>();
 
     Carte(){
         AjouterNoeuds();
@@ -45,9 +47,11 @@ public class Carte {
                     if(Noeud_Depart != null){
                         for(int i = 1; i < params.length; i++){
                             Noeud Noeud_Fin = getNoeud(Integer.parseInt(params[i]));
-                            if(Noeud_Fin !=null)
-                                Chemins.add(new Chemin(Integer.parseInt(params[0]),Noeud_Depart.getCenterX(), Noeud_Depart.getCenterY(),
+                            if(Noeud_Fin !=null) {
+                                LigneChemins.add(new Line(Noeud_Depart.getCenterX(), Noeud_Depart.getCenterY(),
                                         Noeud_Fin.getCenterX(), Noeud_Fin.getCenterY()));
+                                Noeud_Depart.Chemins.add(Noeud_Fin.getID());
+                            }
                         }
                     }
                 }
@@ -58,7 +62,7 @@ public class Carte {
 
     public List<Noeud> getNoeuds(){return Noeuds;}
 
-    public List<Chemin> getChemins(){return Chemins;}
+    public List<Line> getLigneChemins(){return LigneChemins;}
 
     private Noeud getNoeud(int ID){
         for(int i = 0; i < Noeuds.size(); i++) {
