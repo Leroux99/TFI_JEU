@@ -17,6 +17,8 @@ public class Noeud extends Circle{
     public int Joueurs;
     public List<Integer> Chemins = new ArrayList<Integer>();
     public Boolean focused = false;
+    public Color enter = Color.GRAY;
+    public Color exit = Color.BLACK;
 
     Noeud(int ID, int Position_X, int Position_Y, Boolean Constructible){
         super(Position_X, Position_Y, 10, Color.BLACK);
@@ -34,11 +36,7 @@ public class Noeud extends Circle{
     }
 
     public void gererDeplacement(MouseEvent e){
-        /*
-        TODO
-        Va afficher un menu qui va présenter les variables à l'utilisateur et lui laisser le choix entre
-        se déplacer sur le noeud ou fermer le menu
-        */
+        Dialogue.Show(this);
     }
 
     public void gererEnter(MouseEvent e){
@@ -68,8 +66,8 @@ public class Noeud extends Circle{
 
         @Override
         public void run(){
-            if(focused) setFill(Color.GRAY);
-            else setFill(Color.BLACK);
+            if(focused) setFill(enter);
+            else setFill(exit);
         }
     }
 }

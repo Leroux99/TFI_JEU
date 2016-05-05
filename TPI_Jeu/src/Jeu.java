@@ -12,8 +12,8 @@ public class Jeu extends Application{
     final static public int PORT_PROF_JOUEURS = 51006;
     final static public int PORT_PROF_CARTE = 51005;
 
-    Carte carte = new Carte();
-
+    Carte carte = new Carte(); //notre carte
+    public static Joueur joueur; //Notre joueur (static pour être accessible partout)
     class ContenuNoeuds implements Runnable{
         final private String SEPARATEUR=" ";
 
@@ -67,8 +67,14 @@ public class Jeu extends Application{
         }
     }
 
+    public void getStartpoint(){
+        //TODO code
+        joueur = new Joueur(carte.getNoeuds().get(1));
+    }
+
     @Override
     public void start(Stage stage) {
+        getStartpoint();
         Group groupe = new Group();
         groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/carte01.png"));
         groupe.getChildren().addAll(carte.getLigneChemins());
@@ -79,6 +85,7 @@ public class Jeu extends Application{
         stage.setWidth(1600);
         stage.setHeight(900);
         stage.setTitle("L'or du dragon");
+        stage.resizableProperty().setValue(Boolean.FALSE);
         stage.show();
 
         Thread t = new Thread(new ContenuNoeuds());
