@@ -5,7 +5,7 @@ import javafx.stage.Stage;
  */
 public class Question extends Stage {
     public static void Show(){
-
+        //TODO Afficher dialogue qui pose une question
     }
 
 }

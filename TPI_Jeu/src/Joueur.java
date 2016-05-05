@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 public class Joueur {
@@ -5,8 +6,7 @@ public class Joueur {
     public Noeud Position;
 
     Joueur(Noeud noeud){
-        ChangerCouleurs(noeud);
-        Position.setFill(Color.DARKRED);
+        Platform.runLater(new ChangerCouleur(noeud));
     }
 
     public void seDeplacer(Noeud noeud){
@@ -15,20 +15,29 @@ public class Joueur {
             if(noeud.ID == chemin_ID) cheminExists = true;
         }
         if(cheminExists){
-            ChangerCouleurs(noeud);
+            Platform.runLater(new ChangerCouleur(noeud));
+            //TODO envoyer le changement de position au serveur
         }
     }
 
-    private void ChangerCouleurs(Noeud noeud){
-        if(Position != null) {
-            Position.setFill(Color.BLACK);
-            Position.enter = Color.GRAY;
-            Position.exit = Color.BLACK;
-        }
-        Position = noeud;
-        Position.setFill(Color.RED);
-        Position.enter = Color.RED;
-        Position.exit = Color.DARKRED;
-    }
 
+    class ChangerCouleur implements Runnable{
+        Noeud nouveauNoeud;
+
+        ChangerCouleur(Noeud noeud){
+            nouveauNoeud = noeud;
+        }
+        @Override
+        public void run(){
+            if(Position != null) {
+                Position.setFill(Color.BLACK);
+                Position.enter = Color.GRAY;
+                Position.exit = Color.BLACK;
+            }
+            Position = nouveauNoeud;
+            Position.setFill(Color.RED);
+            Position.enter = Color.RED;
+            Position.exit = Color.DARKRED;
+        }
+    }
 }

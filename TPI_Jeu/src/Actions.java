@@ -5,6 +5,6 @@ import javafx.stage.Stage;
  */
 public class Actions extends Stage {
     public void Show(Noeud noeud){
-
+        //TODO Afficher l'or du joueur et lui donner le choix de construire si le noeud le permet
     }
 }

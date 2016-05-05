@@ -68,7 +68,8 @@ public class Jeu extends Application{
     }
 
     public void getStartpoint(){
-        //TODO code
+        //TODO Recevoir le ID du noeud de départ
+        //joueur = new Joueur(carte.getNoeud(ID));
         joueur = new Joueur(carte.getNoeuds().get(1));
     }
 

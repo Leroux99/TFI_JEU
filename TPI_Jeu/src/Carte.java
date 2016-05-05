@@ -58,7 +58,7 @@ public class Carte {
 
     public List<Line> getLigneChemins(){return LigneChemins;}
 
-    private Noeud getNoeud(int ID){
+    public Noeud getNoeud(int ID){
         for(int i = 0; i < Noeuds.size(); i++) {
             if (Noeuds.get(i).getID() == ID) return Noeuds.get(i);
         }
