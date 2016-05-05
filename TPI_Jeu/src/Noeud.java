@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -15,6 +16,7 @@ public class Noeud extends Circle{
     public Boolean Doritos;
     public int Joueurs;
     public List<Integer> Chemins = new ArrayList<Integer>();
+    public Boolean focused = false;
 
     Noeud(int ID, int Position_X, int Position_Y, Boolean Constructible){
         super(Position_X, Position_Y, 10, Color.BLACK);
@@ -40,14 +42,15 @@ public class Noeud extends Circle{
     }
 
     public void gererEnter(MouseEvent e){
+        focused = true;
         this.setCursor(Cursor.HAND);
-        this.setFill(Color.GRAY);
-
+        Platform.runLater(new ChangerCouleur());
     }
 
     public void gererExit(MouseEvent e){
+        focused = false;
         this.setCursor(Cursor.DEFAULT);
-        this.setFill(Color.BLACK);
+        Platform.runLater(new ChangerCouleur());
     }
 
     public int getID(){return ID;}
@@ -59,5 +62,14 @@ public class Noeud extends Circle{
         MountainDew = false;
         Doritos = false;
         Joueurs = 0;
+    }
+
+    class ChangerCouleur implements Runnable{
+
+        @Override
+        public void run(){
+            if(focused) setFill(Color.GRAY);
+            else setFill(Color.BLACK);
+        }
     }
 }
