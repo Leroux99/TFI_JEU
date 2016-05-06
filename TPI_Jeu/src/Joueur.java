@@ -1,6 +1,5 @@
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;

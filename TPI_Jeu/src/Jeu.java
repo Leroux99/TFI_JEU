@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
