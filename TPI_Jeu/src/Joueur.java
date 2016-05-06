@@ -27,7 +27,7 @@ public class Joueur {
     }
 
     public void EnvoyerDeplacement(){
-        Socket Serveur_Prof;
+        Socket Serveur_Prof = null;
         PrintWriter write;
         try{
             Serveur_Prof=new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
@@ -38,7 +38,11 @@ public class Joueur {
             write.close();
             Serveur_Prof.close();
 
-        }catch(IOException e){}
+        }catch(IOException e){
+            try{
+                Serveur_Prof.close();
+            }catch (IOException e1){}
+        }
 
     }
 

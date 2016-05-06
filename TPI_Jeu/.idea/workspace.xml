@@ -40,15 +40,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Joueur.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Joueur.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Joueur.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.60855263">
+              <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-                <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
                 <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
                 <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
               </folding>
@@ -102,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Jeu.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Jeu.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Jeu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40789473">
-              <caret line="83" column="100" selection-start-line="83" selection-start-column="100" selection-end-line="83" selection-end-column="100" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#getStartpoint#0;class#Jeu#0" expanded="false" />
@@ -468,7 +467,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="20" />
+      <option name="time" value="21" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -500,7 +499,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
             <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
           </folding>
@@ -579,7 +577,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
             <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
           </folding>
@@ -665,7 +662,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
             <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
           </folding>
@@ -720,7 +716,6 @@
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
             <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
           </folding>
@@ -822,33 +817,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Question.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Actions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="97" selection-start-line="7" selection-start-column="97" selection-end-line="7" selection-end-column="97" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Joueur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
-            <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -870,11 +843,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Jeu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40789473">
-          <caret line="83" column="100" selection-start-line="83" selection-start-column="100" selection-end-line="83" selection-end-column="100" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#getStartpoint#0;class#Jeu#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Question.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Joueur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60855263">
+          <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
+            <element signature="class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
+            <element signature="method#run#0;class#ChangerCouleur#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -22,7 +22,7 @@ public class Jeu extends Application{
         final private String SEPARATEUR=" ";
 
         public ArrayList listeContenu=new ArrayList();
-        private Socket Serveur_Prof;
+        private Socket Serveur_Prof = null;
         private BufferedReader read;
         private PrintWriter write;
 
