@@ -1,14 +1,18 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
 public class Jeu extends Application{
     final static public String ADRESSE_PROF = "149.56.47.97";
+    final static public int PORT_PROF_COMMANDES = 51007;
     final static public int PORT_PROF_JOUEURS = 51006;
     final static public int PORT_PROF_CARTE = 51005;
 
@@ -77,7 +81,7 @@ public class Jeu extends Application{
     public void start(Stage stage) {
         getStartpoint();
         Group groupe = new Group();
-        groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/carte01.png"));
+        groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/carte02.png"));
         groupe.getChildren().addAll(carte.getLigneChemins());
         groupe.getChildren().addAll(carte.getNoeuds());
 
@@ -87,11 +91,28 @@ public class Jeu extends Application{
         stage.setHeight(900);
         stage.setTitle("L'or du dragon");
         stage.resizableProperty().setValue(Boolean.FALSE);
+        //Quand on quitte le jeu, on envoie "QUIT" au serveur de jeu pour avertir.
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {public void handle(WindowEvent we) {Quitter();}});
         stage.show();
 
         Thread t = new Thread(new ContenuNoeuds());
         t.setDaemon(true);
         t.start();
+    }
+
+    public void Quitter(){
+        Socket Serveur_Prof;
+        PrintWriter write;
+        try{
+            Serveur_Prof=new Socket(ADRESSE_PROF, PORT_PROF_COMMANDES);
+            write = new PrintWriter(
+                    new OutputStreamWriter(Serveur_Prof.getOutputStream()));
+            write.println("QUIT");
+            write.flush();
+            write.close();
+            Serveur_Prof.close();
+
+        }catch(IOException e){}
     }
 
     public static void main(String[] args) {

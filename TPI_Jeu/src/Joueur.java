@@ -1,6 +1,11 @@
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+
 public class Joueur {
 
     public Noeud Position;
@@ -17,9 +22,25 @@ public class Joueur {
         if(cheminExists){
             Platform.runLater(new ChangerCouleur(noeud));
             //TODO envoyer le changement de position au serveur
+            EnvoyerDeplacement();
         }
     }
 
+    public void EnvoyerDeplacement(){
+        Socket Serveur_Prof;
+        PrintWriter write;
+        try{
+            Serveur_Prof=new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
+            write = new PrintWriter(
+                    new OutputStreamWriter(Serveur_Prof.getOutputStream()));
+            write.println("GOTO " + Position.ID);
+            write.flush();
+            write.close();
+            Serveur_Prof.close();
+
+        }catch(IOException e){}
+
+    }
 
     class ChangerCouleur implements Runnable{
         Noeud nouveauNoeud;
