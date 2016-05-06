@@ -1,8 +1,4 @@
 
-
-/**
- * Created by 201324650 on 2016-05-05.
- */
 public class Dialogue {
 
     public static void Show(Noeud noeud) {
@@ -18,5 +14,4 @@ public class Dialogue {
     public static void ShowQuestion(){
         Question.Show();
     }
-
 }
