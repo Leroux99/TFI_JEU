@@ -6,7 +6,7 @@ public class Dialogue {
             if (Jeu.joueur.Position == noeud) {
                 new Actions().Show(noeud);
             } else {
-                Jeu.joueur.seDeplacer(noeud);
+                new Infos().Show(noeud);
             }
         }catch(Exception e){}
     }
