@@ -27,6 +27,7 @@ public class Noeud extends Circle{
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> gererDeplacement(e));
         this.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> gererEnter(e));
         this.addEventHandler(MouseEvent.MOUSE_EXITED, e -> gererExit(e));
+        this.setCursor(Cursor.HAND);
         Troll = false;
         Gobelin = false;
         Or= false;
@@ -36,19 +37,20 @@ public class Noeud extends Circle{
     }
 
     public void gererDeplacement(MouseEvent e){
-        Dialogue.Show(this);
+        Jeu.joueur.seDeplacer(this);
     }
 
     public void gererEnter(MouseEvent e){
         focused = true;
-        this.setCursor(Cursor.HAND);
         Platform.runLater(new ChangerCouleur());
+        Jeu.infos.UpdateInfos(this);
+        Platform.runLater(new ChangerInfos());
     }
 
     public void gererExit(MouseEvent e){
         focused = false;
-        this.setCursor(Cursor.DEFAULT);
         Platform.runLater(new ChangerCouleur());
+        Platform.runLater(new HideInfos());
     }
 
     public int getID(){return ID;}
@@ -68,6 +70,20 @@ public class Noeud extends Circle{
         public void run(){
             if(focused) setFill(enter);
             else setFill(exit);
+        }
+    }
+
+    class ChangerInfos implements Runnable{
+        @Override
+        public void run(){
+            Jeu.infos.ShowText();
+        }
+    }
+
+    class HideInfos implements  Runnable {
+        @Override
+        public void run(){
+            Jeu.infos.HideText();
         }
     }
 }

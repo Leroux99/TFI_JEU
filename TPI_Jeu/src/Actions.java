@@ -1,49 +1,64 @@
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
-import java.util.Optional;
+import javafx.scene.Cursor;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
-public class Actions extends Stage {
-    public void Show(Noeud noeud){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Actions");
-        alert.setHeaderText(null);
+import java.util.ArrayList;
+import java.util.List;
 
-        ButtonType buttonTypeAuberge = new ButtonType("Auberge");
-        ButtonType buttonTypeManoir = new ButtonType("Manoir");
-        ButtonType buttonTypeChateau = new ButtonType("Château");
-        ButtonType buttonTypeOk = new ButtonType("Ok", ButtonBar.ButtonData.CANCEL_CLOSE);
+public class Actions {
+    private List<Text> infos = new ArrayList<Text>();
 
-        StringBuffer message = new StringBuffer();
-        message.append("Or: " + "\r\n");
-        message.append("Doritos: " + "\r\n");
-        message.append("Mountain Dew: " + "\r\n");
-        if(noeud.Constructible){
-            message.append("Construire? \r\n");
-            //message.append("Le noeud appartient à: " + "\r\n");
-        } else{
-            message.append("Le noeud n'est pas constructible. " + "\r\n");
-        }
-        alert.setContentText(message.toString());
+    private Text or = new Text(1021,822, "Or: " + Jeu.joueur.Or);
+    private Text doritos = new Text(1021,852, "Doritos: " + Jeu.joueur.Doritos);
+    private Text mountaindew = new Text(1021, 882, "Mountain Dew: " + Jeu.joueur.MountainDew);
 
-        //Choisir quel bouton afficher si le noeud est constructible ou non ou s'il appartient à quelqu'un
-        if(noeud.Constructible){
-            alert.getButtonTypes().setAll(buttonTypeAuberge, buttonTypeManoir, buttonTypeChateau, buttonTypeOk);
-        } else{
-            alert.getButtonTypes().setAll(buttonTypeOk);
+    private Rectangle construire = new Rectangle();
+    private Text construire_text = new Text("Construire");
+
+    public Actions(){
+        infos.add(or);
+        infos.add(doritos);
+        infos.add(mountaindew);
+
+        for(Text t : infos){
+            t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         }
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == buttonTypeAuberge){
-            // ... user chose "Auberge"
-        } else if (result.get() == buttonTypeManoir) {
-            // ... user chose "Manoir"
-        } else if (result.get() == buttonTypeChateau) {
-            // ... user chose "Chateau"
-        } else {
-            // ... user chose OK or closed the dialog
-        }
-        //TODO Afficher l'or du joueur et lui donner le choix de construire si le noeud le permet
+        construire.setX(1408);
+        construire.setY(821);
+        construire.setHeight(59);
+        construire.setWidth(179);
+        construire.setStroke(Color.GRAY);
+        construire.setFill(Color.LIGHTGRAY);
+        construire.setStrokeWidth(2);
+        construire.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> gererClic(e));
+        construire.setCursor(Cursor.HAND);
+
+        construire_text.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        construire_text.setX(1458);
+        construire_text.setY(854);
+        construire_text.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> gererClic(e));
+        construire_text.setCursor(Cursor.HAND);
+
     }
+
+    public List<Text> getInfos() {
+        return infos;
+    }
+
+    public Rectangle getConstruire() {
+        return construire;
+    }
+
+    public Text getConstruire_text() {
+        return construire_text;
+    }
+
+    public void gererClic(MouseEvent e) {
+            //TODO CONSTRUIRE
+        }
 }

@@ -17,6 +17,9 @@ public class Jeu extends Application{
 
     Carte carte = new Carte(); //notre carte
     public static Joueur joueur; //Notre joueur (static pour être accessible partout)
+    public static Information infos;
+    public static Actions actions;
+
     class ContenuNoeuds implements Runnable{
         final private String SEPARATEUR=" ";
 
@@ -79,15 +82,22 @@ public class Jeu extends Application{
     @Override
     public void start(Stage stage) {
         getStartpoint();
+        infos = new Information();
+        actions = new Actions();
+
         Group groupe = new Group();
         groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/carte02.png"));
         groupe.getChildren().addAll(carte.getLigneChemins());
         groupe.getChildren().addAll(carte.getNoeuds());
+        groupe.getChildren().addAll(infos.getInfos());
+        groupe.getChildren().addAll(actions.getInfos());
+        groupe.getChildren().addAll(actions.getConstruire(), actions.getConstruire_text());
 
         Scene scene = new Scene(groupe);
+
         stage.setScene(scene);
-        stage.setWidth(1600);
-        stage.setHeight(900);
+        //stage.setWidth(1600);
+        //stage.setHeight(900);
         stage.setTitle("L'or du dragon");
         stage.resizableProperty().setValue(Boolean.FALSE);
         //Quand on quitte le jeu, on envoie "QUIT" au serveur de jeu pour avertir.

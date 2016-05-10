@@ -8,7 +8,9 @@ import java.net.Socket;
 public class Joueur {
 
     public Noeud Position;
-
+    public int Or = 0;
+    public int Doritos =0;
+    public int MountainDew = 0;
     Joueur(Noeud noeud){
         Platform.runLater(new ChangerCouleur(noeud));
     }
@@ -20,8 +22,8 @@ public class Joueur {
         }
         if(cheminExists){
             Platform.runLater(new ChangerCouleur(noeud));
-            //TODO envoyer le changement de position au serveur
             EnvoyerDeplacement();
+            //TODO recevoir la réponse du serveur
         }
     }
 
