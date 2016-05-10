@@ -53,6 +53,7 @@ public class Information {
         if(noeud.Constructible) constructible.setText("Constructible: Oui");
         else or.setText("Constructible: Non");
         joueurs.setText("Joueurs: " + noeud.Joueurs);
+        batiment.setText("Batiment: " + noeud.batiment);
     }
 
     public void HideText(){

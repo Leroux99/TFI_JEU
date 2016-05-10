@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Noeud extends Circle{
+    enum typebatiment {aucun, auberge, manoir, chateau}
     int ID;
     public Boolean Constructible;
     public Boolean Troll;
@@ -14,6 +15,7 @@ public class Noeud extends Circle{
     public Boolean Or;
     public Boolean MountainDew;
     public Boolean Doritos;
+    public typebatiment batiment;
     public int Joueurs;
     public List<Integer> Chemins = new ArrayList<Integer>();
     public Boolean focused = false;
@@ -34,6 +36,7 @@ public class Noeud extends Circle{
         MountainDew = false;
         Doritos = false;
         Joueurs = 0;
+        batiment = typebatiment.aucun;
     }
 
     public void gererDeplacement(MouseEvent e){
