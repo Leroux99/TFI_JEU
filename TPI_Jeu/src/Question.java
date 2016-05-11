@@ -1,9 +1,8 @@
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 import java.util.Optional;
 
-public class Question extends Stage {
+public class Question {
     public static void Show(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Question");

@@ -152,7 +152,7 @@ public class Jeu extends Application {
             groupe.getChildren().addAll(carte.getNoeuds());
             groupe.getChildren().addAll(infos.getInfos());
             groupe.getChildren().addAll(actions.getInfos());
-            groupe.getChildren().addAll(actions.getConstruire(), actions.getConstruire_text());
+            groupe.getChildren().addAll(actions.getConstruire(), actions.getConstruire_text(), actions.getResultatConstruire());
 
             Scene scene = new Scene(groupe);
 

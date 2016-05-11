@@ -9,9 +9,6 @@ import java.sql.SQLException;
 public class Joueur {
 
     public Noeud Position;
-    public int Or = 0;
-    public int Doritos = 0;
-    public int MountainDew = 0;
 
     Joueur(Noeud noeud) {
         Platform.runLater(new ChangerCouleur(noeud));
@@ -44,15 +41,15 @@ public class Joueur {
             ligne = reader.readLine();
 
             if (ligne.equals("P")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATE_OR(?)}");
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
                 cStat.setInt(1, 1);
                 cStat.executeUpdate();
             } else if (ligne.equals("M")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATE_MOUNTAINDEW(?)}");
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_MOUNTAINDEW(?)}");
                 cStat.setInt(1, 1);
                 cStat.executeUpdate();
             } else if (ligne.equals("D")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATE_DORITOS(?)}");
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_DORITOS(?)}");
                 cStat.setInt(1, 1);
                 cStat.executeUpdate();
             } else if (ligne.contains("IP")) {
@@ -62,9 +59,10 @@ public class Joueur {
             } else if (ligne.equals("G")) {
 
             }
+            Jeu.actions.UpdateStats();
             reader.close();
             write.close();
-            cStat.close();
+            if(cStat != null) cStat.close();
             Serveur_Prof.close();
         } catch (IOException e) {
             e.printStackTrace();
