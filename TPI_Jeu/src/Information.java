@@ -14,7 +14,7 @@ public class Information {
     Text troll = new Text(210, 50, "Troll: ");
     Text joueurs = new Text(210, 80, "Joueurs: ");
     Text constructible = new Text(410, 20, "Constructible: ");
-    Text proprietaire = new Text(410,50,"Propriétaite: ");
+    Text proprietaire = new Text(410,50,"Propriétaire: ");
     Text batiment = new Text(410, 80, "Batiment: ");
 
     public Information(){

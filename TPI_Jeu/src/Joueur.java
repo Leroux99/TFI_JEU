@@ -1,61 +1,88 @@
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.net.Socket;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 
 public class Joueur {
 
     public Noeud Position;
     public int Or = 0;
-    public int Doritos =0;
+    public int Doritos = 0;
     public int MountainDew = 0;
-    Joueur(Noeud noeud){
+
+    Joueur(Noeud noeud) {
         Platform.runLater(new ChangerCouleur(noeud));
     }
 
-    public void seDeplacer(Noeud noeud){
+    public void seDeplacer(Noeud noeud) {
         Boolean cheminExists = false;
-        for(Integer chemin_ID : Position.Chemins){
-            if(noeud.ID == chemin_ID) cheminExists = true;
+        for (Integer chemin_ID : Position.Chemins) {
+            if (noeud.ID == chemin_ID) cheminExists = true;
         }
-        if(cheminExists){
+        if (cheminExists) {
             Platform.runLater(new ChangerCouleur(noeud));
             EnvoyerDeplacement();
             //TODO recevoir la réponse du serveur
         }
     }
 
-    public void EnvoyerDeplacement(){
-        Socket Serveur_Prof = null;
+    public void EnvoyerDeplacement() {
+        CallableStatement cStat = null;
+        Socket Serveur_Prof;
         PrintWriter write;
-        try{
-            Serveur_Prof=new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
-            write = new PrintWriter(
-                    new OutputStreamWriter(Serveur_Prof.getOutputStream()));
+        BufferedReader reader;
+        String ligne;
+        try {
+            Serveur_Prof = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
+            write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
+            reader = new BufferedReader(new InputStreamReader(Serveur_Prof.getInputStream()));
             write.println("GOTO " + Position.ID);
             write.flush();
+            ligne = reader.readLine();
+
+            if (ligne.equals("P")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATE_OR(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+            } else if (ligne.equals("M")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATE_MOUNTAINDEW(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+            } else if (ligne.equals("D")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATE_DORITOS(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+            } else if (ligne.contains("IP")) {
+
+            } else if (ligne.equals("T")) {
+
+            } else if (ligne.equals("G")) {
+
+            }
+            reader.close();
             write.close();
+            cStat.close();
             Serveur_Prof.close();
-
-        }catch(IOException e){
-            try{
-                Serveur_Prof.close();
-            }catch (IOException e1){}
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
     }
 
-    class ChangerCouleur implements Runnable{
+    class ChangerCouleur implements Runnable {
         Noeud nouveauNoeud;
 
-        ChangerCouleur(Noeud noeud){
+        ChangerCouleur(Noeud noeud) {
             nouveauNoeud = noeud;
         }
+
         @Override
-        public void run(){
-            if(Position != null) {
+        public void run() {
+            if (Position != null) {
                 Position.setFill(Color.BLACK);
                 Position.enter = Color.GRAY;
                 Position.exit = Color.BLACK;

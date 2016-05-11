@@ -6,25 +6,29 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.io.*;
+import java.net.Socket;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Actions {
     private List<Text> infos = new ArrayList<Text>();
 
-    private Text or = new Text(1021,822, "Or: " + Jeu.joueur.Or);
-    private Text doritos = new Text(1021,852, "Doritos: " + Jeu.joueur.Doritos);
+    private Text or = new Text(1021, 822, "Or: " + Jeu.joueur.Or);
+    private Text doritos = new Text(1021, 852, "Doritos: " + Jeu.joueur.Doritos);
     private Text mountaindew = new Text(1021, 882, "Mountain Dew: " + Jeu.joueur.MountainDew);
 
     private Rectangle construire = new Rectangle();
     private Text construire_text = new Text("Construire");
 
-    public Actions(){
+    public Actions() {
         infos.add(or);
         infos.add(doritos);
         infos.add(mountaindew);
 
-        for(Text t : infos){
+        for (Text t : infos) {
             t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         }
 
@@ -59,6 +63,41 @@ public class Actions {
     }
 
     public void gererClic(MouseEvent e) {
-            //TODO CONSTRUIRE
+        CallableStatement cStat;
+        String ligne;
+        Socket Serveur_Prof;
+        PrintWriter write;
+        BufferedReader reader;
+        try {
+            Serveur_Prof = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
+            write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
+            reader = new BufferedReader(new InputStreamReader(Serveur_Prof.getInputStream()));
+            write.println("BUILD");
+            write.flush();
+            ligne = reader.readLine();
+            if (ligne.equals("AUB")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATEAUBERGE(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+                //JOptionPane.showMessageDialog(null, "AUBERGE AJOUTÉ !");
+            } else if (ligne.equals("MAN")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATEMANOIR(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+                //JOptionPane.showMessageDialog(null, "MANOIR AJOUTÉ !");
+            } else if (ligne.equals("CHA")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TPORDRAGON.UPDATECHATEAU(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+                //JOptionPane.showMessageDialog(null, "CHATEAU AJOUTÉ !");
+            }
+            reader.close();
+            write.close();
+            Serveur_Prof.close();
+        } catch (SQLException sex) {
+            sex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
+    }
 }
