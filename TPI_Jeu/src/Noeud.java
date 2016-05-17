@@ -43,12 +43,7 @@ public class Noeud extends Circle{
     }
 
     public void gererDeplacement(MouseEvent e){
-        //Jeu.joueur.seDeplacer(this);
-        try {
-            Question.Show(Inet4Address.getLocalHost().getHostAddress());
-        } catch (UnknownHostException e1) {
-            e1.printStackTrace();
-        }
+        Jeu.joueur.seDeplacer(this);
     }
 
     public void gererEnter(MouseEvent e){
