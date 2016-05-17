@@ -25,6 +25,7 @@ public class Jeu extends Application {
     public static Information infos;
     public static Actions actions;
     public static Connection CONNEXION = null;
+    public static String NomEquipe = "zLeslicornesroses";
 
 
     class ContenuNoeuds implements Runnable {
@@ -123,13 +124,12 @@ public class Jeu extends Application {
     }
 
     public void Identification() {
-        String nomJoueur = "les licornes roses";
         Socket Serveur_Prof;
         PrintWriter write;
         try {
             Serveur_Prof = new Socket(ADRESSE_PROF, PORT_PROF_COMMANDES);
             write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
-            write.println("HELLO " + nomJoueur + Inet4Address.getLocalHost().getHostAddress());
+            write.println("HELLO " + NomEquipe + " " + Inet4Address.getLocalHost().getHostAddress());
             write.flush();
             write.close();
             Serveur_Prof.close();
@@ -147,7 +147,7 @@ public class Jeu extends Application {
             actions = new Actions();
 
             Group groupe = new Group();
-            groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/carte02.png"));
+            groupe.getChildren().add(new ImageView("http://prog101.com/travaux/dragon/images/nowhereland.png"));
             groupe.getChildren().addAll(carte.getLigneChemins());
             groupe.getChildren().addAll(carte.getNoeuds());
             groupe.getChildren().addAll(infos.getInfos());
@@ -172,6 +172,10 @@ public class Jeu extends Application {
             Thread t = new Thread(new ContenuNoeuds());
             t.setDaemon(true);
             t.start();
+
+            Thread t2 = new Thread(new NotreServeur());
+            t2.setDaemon(true);
+            t2.start();
         }
     }
 

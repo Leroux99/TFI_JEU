@@ -32,6 +32,7 @@ public class Joueur {
         PrintWriter write;
         BufferedReader reader;
         String ligne;
+        String ipProprietaire = "";
         try {
             Serveur_Prof = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
             write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
@@ -53,7 +54,8 @@ public class Joueur {
                 cStat.setInt(1, 1);
                 cStat.executeUpdate();
             } else if (ligne.contains("IP")) {
-
+                ipProprietaire = ligne.substring(3);
+                Question.Show(ipProprietaire);
             } else if (ligne.equals("T")) {
 
             } else if (ligne.equals("G")) {

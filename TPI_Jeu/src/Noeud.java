@@ -3,6 +3,9 @@ import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +43,12 @@ public class Noeud extends Circle{
     }
 
     public void gererDeplacement(MouseEvent e){
-        Jeu.joueur.seDeplacer(this);
+        //Jeu.joueur.seDeplacer(this);
+        try {
+            Question.Show(Inet4Address.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e1) {
+            e1.printStackTrace();
+        }
     }
 
     public void gererEnter(MouseEvent e){
