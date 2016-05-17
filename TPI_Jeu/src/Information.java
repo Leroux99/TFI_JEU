@@ -51,7 +51,7 @@ public class Information {
         if(noeud.MountainDew) mountaindew.setText("Mountain Dew: Oui");
         else mountaindew.setText("Mountain Dew: Non");
         if(noeud.Constructible) constructible.setText("Constructible: Oui");
-        else or.setText("Constructible: Non");
+        else constructible.setText("Constructible: Non");
         joueurs.setText("Joueurs: " + noeud.Joueurs);
         batiment.setText("Batiment: " + noeud.batiment);
     }

@@ -62,6 +62,8 @@ public class ThreadClient implements Runnable {
             numQuestion = resultSet.getInt(1);
             // Envoyer la question
             writer.println(resultSet.getString(2));
+            cStat.clearParameters();
+            cStat.close();
 
             cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.GetReponses(?,?)}");
             cStat.setInt(1, numQuestion);
@@ -75,6 +77,8 @@ public class ThreadClient implements Runnable {
                 num++;
             }
             writer.println();
+            cStat.clearParameters();
+            cStat.close();
             String ligne = readerLigneClient.readLine();
             while(ligne == null) ligne = readerLigneClient.readLine();
 
@@ -94,6 +98,8 @@ public class ThreadClient implements Runnable {
                 // TODO le client dois nous payer
             }
             writer.flush();
+            cStat.clearParameters();
+            cStat.close();
             // Dire a francois d'unlock le joueur
             writerFrancois.println("UNLOCK " + IDClient);
             writerFrancois.flush();

@@ -79,7 +79,7 @@ public class Actions {
     }
 
     public void gererClic(MouseEvent e) {
-        CallableStatement cStat;
+        CallableStatement cStat = null;
         String ligne;
         Socket Serveur_Prof;
         PrintWriter write;
@@ -109,6 +109,10 @@ public class Actions {
                 cStat.executeUpdate();
                 resultatConstruire.setText("CHATEAU AJOUTÉ !");
                 new AfficherResultatConstruire().start();
+            }
+            if(cStat != null) {
+                cStat.clearParameters();
+                cStat.close();
             }
             reader.close();
             write.close();

@@ -4,8 +4,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 

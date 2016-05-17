@@ -64,7 +64,10 @@ public class Joueur {
             Jeu.actions.UpdateStats();
             reader.close();
             write.close();
-            if(cStat != null) cStat.close();
+            if(cStat != null){
+                cStat.clearParameters();
+                cStat.close();
+            }
             Serveur_Prof.close();
         } catch (IOException e) {
             e.printStackTrace();
