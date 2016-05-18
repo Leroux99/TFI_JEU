@@ -57,9 +57,14 @@ public class Joueur {
                 ipProprietaire = ligne.substring(3);
                 Question.Show(ipProprietaire);
             } else if (ligne.equals("T")) {
-
+                //TODO mettre à jour la bd
+                System.out.println("troll");
+                write.println("FREE");
+                write.flush();
             } else if (ligne.equals("G")) {
-
+                //TODO mettre à jour la bd
+                write.println("FREE");
+                write.flush();
             }
             Jeu.actions.UpdateStats();
             reader.close();

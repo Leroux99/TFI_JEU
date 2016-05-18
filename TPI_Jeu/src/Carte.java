@@ -1,3 +1,4 @@
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -77,9 +78,27 @@ public class Carte {
             try {
                 if (Temp[1].equals("T")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Troll = true;
                 else if (Temp[1].equals("G")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Gobelin = true;
-                else if (Temp[1].equals("P")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Or = true;
-                else if (Temp[1].equals("M")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).MountainDew = true;
-                else if (Temp[1].equals("D")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Doritos = true;
+                else if (Temp[1].equals("P")){
+                    Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
+                    n.Or = true;
+                    n.exit = Color.YELLOW;
+                    n.enter = Color.LIGHTYELLOW;
+                    n.UpdateColors();
+                }
+                else if (Temp[1].equals("M")){
+                    Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
+                    n.MountainDew = true;
+                    n.exit = Color.PURPLE;
+                    n.enter = Color.MEDIUMPURPLE;
+                    n.UpdateColors();
+                }
+                else if (Temp[1].equals("D")){
+                    Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
+                    n.Doritos = true;
+                    n.exit = Color.DARKORANGE;
+                    n.enter = Color.ORANGE;
+                    n.UpdateColors();
+                }
                 else if (Temp[1].equals("A")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.auberge;
                 else if (Temp[1].equals("N")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.manoir;
                 else if (Temp[1].equals("C")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.chateau;

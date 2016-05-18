@@ -64,6 +64,14 @@ public class Noeud extends Circle{
         MountainDew = false;
         Doritos = false;
         batiment = typebatiment.aucun;
+        if(Jeu.joueur.Position.ID == ID){
+            enter = Color.RED;
+            exit = Color.DARKRED;
+        }
+        else{
+            enter = Color.GRAY;
+            exit = Color.BLACK;
+        }
     }
 
     class ChangerCouleur implements Runnable{
@@ -87,5 +95,9 @@ public class Noeud extends Circle{
         public void run(){
             Jeu.infos.HideText();
         }
+    }
+
+    public void UpdateColors(){
+        Platform.runLater(new ChangerCouleur());
     }
 }

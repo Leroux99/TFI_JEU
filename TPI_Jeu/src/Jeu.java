@@ -50,8 +50,6 @@ public class Jeu extends Application {
                 boolean fini = false;
                 String ligne = null;
                 String[] nbDinfo;
-                int numNoeud;
-                String nbObj;
 
                 while (!fini) {
                     ligne = read.readLine();
