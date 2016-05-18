@@ -27,7 +27,7 @@ public class Question {
             // get les questions/réponses
             reader = new BufferedReader(new InputStreamReader(Soc_Proprietaire.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(Soc_Proprietaire.getOutputStream()));
-            writer.println(Jeu.NomEquipe);
+            writer.println(Jeu.NomEquipe + " " + Jeu.joueur.Position.ID);
             writer.flush();
             Boolean estVide = false;
             String ligne = null;

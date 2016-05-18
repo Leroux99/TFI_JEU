@@ -75,8 +75,7 @@ public class Carte {
         for(int i = 0; i < Infos.size(); i++){
             String[] Temp = Infos.get(i).split(":");
             try {
-                if (Temp[1].equals("J")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Joueurs++;
-                else if (Temp[1].equals("T")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Troll = true;
+                if (Temp[1].equals("T")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Troll = true;
                 else if (Temp[1].equals("G")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Gobelin = true;
                 else if (Temp[1].equals("P")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Or = true;
                 else if (Temp[1].equals("M")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).MountainDew = true;

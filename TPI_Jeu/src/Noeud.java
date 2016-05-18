@@ -17,7 +17,6 @@ public class Noeud extends Circle{
     public Boolean MountainDew;
     public Boolean Doritos;
     public typebatiment batiment;
-    public int Joueurs;
     public List<Integer> Chemins = new ArrayList<Integer>();
     public Boolean focused = false;
     public Color enter = Color.GRAY;
@@ -36,7 +35,6 @@ public class Noeud extends Circle{
         Or= false;
         MountainDew = false;
         Doritos = false;
-        Joueurs = 0;
         batiment = typebatiment.aucun;
     }
 
@@ -65,7 +63,7 @@ public class Noeud extends Circle{
         Or= false;
         MountainDew = false;
         Doritos = false;
-        Joueurs = 0;
+        batiment = typebatiment.aucun;
     }
 
     class ChangerCouleur implements Runnable{

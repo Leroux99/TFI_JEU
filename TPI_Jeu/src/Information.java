@@ -12,10 +12,8 @@ public class Information {
     Text mountaindew = new Text(10, 80, "Mountain Dew: ");
     Text gobelin = new Text(210, 20, "Gobelin: ");
     Text troll = new Text(210, 50, "Troll: ");
-    Text joueurs = new Text(210, 80, "Joueurs: ");
-    Text constructible = new Text(410, 20, "Constructible: ");
-    Text proprietaire = new Text(410,50,"Propriétaire: ");
-    Text batiment = new Text(410, 80, "Batiment: ");
+    Text constructible = new Text(210, 80, "Constructible: ");
+    Text batiment = new Text(410, 20, "Batiment: ");
 
     public Information(){
         infos.add(or);
@@ -23,9 +21,7 @@ public class Information {
         infos.add(mountaindew);
         infos.add(gobelin);
         infos.add(troll);
-        infos.add(joueurs);
         infos.add(constructible);
-        infos.add(proprietaire);
         infos.add(batiment);
 
         for(Text t : infos){
@@ -52,7 +48,6 @@ public class Information {
         else mountaindew.setText("Mountain Dew: Non");
         if(noeud.Constructible) constructible.setText("Constructible: Oui");
         else constructible.setText("Constructible: Non");
-        joueurs.setText("Joueurs: " + noeud.Joueurs);
         batiment.setText("Batiment: " + noeud.batiment);
     }
 

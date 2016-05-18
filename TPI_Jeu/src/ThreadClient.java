@@ -17,6 +17,8 @@ public class ThreadClient implements Runnable {
     private CallableStatement cStat = null;
     private ResultSet resultSet = null;
     private Socket Serveur_Prof;
+    private final String SEPARATEUR = " ";
+    private String noeudID = "";
 
 
     ThreadClient(Socket socClient) {
@@ -34,27 +36,19 @@ public class ThreadClient implements Runnable {
             List<Integer> numReponses = new ArrayList<Integer>();
 
             // Recois le ID de celui qui est sur notre immeuble
-            IDClient = readerLigneClient.readLine();
+            String[] Temp = readerLigneClient.readLine().split(SEPARATEUR);
+            IDClient = Temp[0];
+            noeudID = Temp[1];
 
             // Lui envoyer la question et les choix de réponses
             cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.GetQuestionHasard(?,?)}");
-            // TODO check difficulte selon immeuble
-            /*
-            if (immeuble is auberge)
-            {
-                cStat.setString(1, "F");
-            }
-            else if (immeuble is manoir)
-            {
-                cStat.setString(1, "M");
-            }
-            else if (immeuble is chateau)
-            {
-                cStat.setString(1, "N");
-            }
-            */
-            //Pour tester
-            cStat.setString(1, "F");
+
+            Noeud noeudCible = new Carte().getNoeud(Integer.parseInt(noeudID));
+
+            if (noeudCible.batiment == Noeud.typebatiment.auberge) cStat.setString(1, "F");
+            else if (noeudCible.batiment == Noeud.typebatiment.manoir) cStat.setString(1, "M");
+            else if (noeudCible.batiment == Noeud.typebatiment.chateau) cStat.setString(1, "D");
+
             cStat.registerOutParameter(2, OracleTypes.CURSOR);
             cStat.execute();
             resultSet = (ResultSet) cStat.getObject(2);
