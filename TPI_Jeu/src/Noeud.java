@@ -90,6 +90,10 @@ public class Noeud extends Circle{
                 enter=Color.WHITE;
                 exit = Color.LIGHTGREY;
             }
+            else if(batiment != typebatiment.aucun){
+                enter = Color.LIGHTBLUE;
+                exit = Color.BLUE;
+            }
             else if(Or){
                 enter= Color.LIGHTYELLOW;
                 exit = Color.YELLOW;

@@ -1,3 +1,4 @@
+import javafx.geometry.Pos;
 import oracle.jdbc.OracleTypes;
 
 import java.io.*;
@@ -32,50 +33,65 @@ public class Joueur {
         String ligne;
         String ipProprietaire = "";
         Boolean peutSeDeplacer = true;
-        try {
-            Jeu.writerCommandes.println("GOTO " + noeudCible.ID);
-            Jeu.writerCommandes.flush();
-            ligne = Jeu.readerCommandes.readLine();
-            if (ligne.equals("P")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();
-            } else if (ligne.equals("M")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_MOUNTAINDEW(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();
-            } else if (ligne.equals("D")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_DORITOS(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();
-            } else if (ligne.contains("IP")) {
-                ipProprietaire = ligne.substring(3);
-                Question.Show(ipProprietaire);
-            } else if (ligne.equals("T")) {
-                payerTroll();
-                Jeu.writerCommandes.println("NODE");
-                Jeu.writerCommandes.flush();
-                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
-            } else if (ligne.equals("G")) {
-                payerGobelin();
-                Jeu.writerCommandes.println("NODE");
-                Jeu.writerCommandes.flush();
-                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
 
-            }else if(ligne.equals("ERR")) peutSeDeplacer = false;
-            Jeu.actions.UpdateStats();
-            if(cStat != null){
-                cStat.clearParameters();
-                cStat.close();
+        Integer noeud_en_cours;
+
+        try {
+            Jeu.writerCommandes.println("NODE");
+            Jeu.writerCommandes.flush();
+            noeud_en_cours = Integer.parseInt(Jeu.readerCommandes.readLine());
+
+            if(noeud_en_cours == Position.ID) {
+                Jeu.writerCommandes.println("GOTO " + noeudCible.ID);
+                Jeu.writerCommandes.flush();
+                ligne = Jeu.readerCommandes.readLine();
+                if (ligne.equals("P")) {
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
+                    cStat.setInt(1, 1);
+                    cStat.executeUpdate();
+                } else if (ligne.equals("M")) {
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_MOUNTAINDEW(?)}");
+                    cStat.setInt(1, 1);
+                    cStat.executeUpdate();
+                } else if (ligne.equals("D")) {
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_DORITOS(?)}");
+                    cStat.setInt(1, 1);
+                    cStat.executeUpdate();
+                } else if (ligne.contains("IP")) {
+                    System.out.println(ligne);
+                    ipProprietaire = ligne.substring(3);
+                    Question.Show(ipProprietaire);
+                } else if (ligne.equals("T")) {
+                    payerTroll();
+                    Jeu.writerCommandes.println("NODE");
+                    Jeu.writerCommandes.flush();
+                    noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+                } else if (ligne.equals("G")) {
+                    payerGobelin();
+                    Jeu.writerCommandes.println("NODE");
+                    Jeu.writerCommandes.flush();
+                    noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+
+                } else if (ligne.equals("ERR")) peutSeDeplacer = false;
+                Jeu.actions.UpdateStats();
+                if (cStat != null) {
+                    cStat.clearParameters();
+                    cStat.close();
+                }
+                if (peutSeDeplacer) setPosition(noeudCible);
             }
-            if(peutSeDeplacer) setPosition(noeudCible);
+            else{
+                setPosition(new Carte().getNoeud(noeud_en_cours));
+            }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
 
     private void setPosition(Noeud noeud){
+        Noeud tempNoeud = Position;
         Position = noeud;
+        tempNoeud.UpdateColors();
         Position.UpdateColors();
     }
 
