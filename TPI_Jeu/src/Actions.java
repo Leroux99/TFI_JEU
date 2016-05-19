@@ -81,16 +81,10 @@ public class Actions {
     public void gererClic(MouseEvent e) {
         CallableStatement cStat = null;
         String ligne;
-        Socket Serveur_Prof;
-        PrintWriter write;
-        BufferedReader reader;
         try {
-            Serveur_Prof = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
-            write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
-            reader = new BufferedReader(new InputStreamReader(Serveur_Prof.getInputStream()));
-            write.println("BUILD");
-            write.flush();
-            ligne = reader.readLine();
+            Jeu.writerCommandes.println("BUILD");
+            Jeu.writerCommandes.flush();
+            ligne = Jeu.readerCommandes.readLine();
             if (ligne.equals("AUB")) {
                 cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Auberge(?)}");
                 cStat.setInt(1, 1);
@@ -114,11 +108,9 @@ public class Actions {
                 cStat.clearParameters();
                 cStat.close();
             }
-            reader.close();
-            write.close();
-            Serveur_Prof.close();
-        } catch (SQLException sex) {
-            sex.printStackTrace();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

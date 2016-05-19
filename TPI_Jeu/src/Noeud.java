@@ -78,6 +78,14 @@ public class Noeud extends Circle{
 
         @Override
         public void run(){
+            if(Jeu.joueur.Position.ID == ID){
+                enter = Color.RED;
+                exit = Color.DARKRED;
+            }
+            else{
+                enter = Color.GRAY;
+                exit = Color.BLACK;
+            }
             if(focused) setFill(enter);
             else setFill(exit);
         }

@@ -1,4 +1,5 @@
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 
 import java.io.*;
@@ -11,7 +12,8 @@ public class Joueur {
     public Noeud Position;
 
     Joueur(Noeud noeud) {
-        Platform.runLater(new ChangerCouleur(noeud));
+        Position = noeud;
+        noeud.UpdateColors();
     }
 
     public void seDeplacer(Noeud noeud) {
@@ -20,7 +22,10 @@ public class Joueur {
             if (noeud.ID == chemin_ID) cheminExists = true;
         }
         if (cheminExists) {
-            Platform.runLater(new ChangerCouleur(noeud));
+            Noeud temp = Position;
+            Position = noeud;
+            temp.UpdateColors();
+            Position.UpdateColors();
             EnvoyerDeplacement();
             //TODO recevoir la réponse du serveur
         }
@@ -34,13 +39,9 @@ public class Joueur {
         String ligne;
         String ipProprietaire = "";
         try {
-            Serveur_Prof = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
-            write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
-            reader = new BufferedReader(new InputStreamReader(Serveur_Prof.getInputStream()));
-            write.println("GOTO " + Position.ID);
-            write.flush();
-            ligne = reader.readLine();
-
+            Jeu.writerCommandes.println("GOTO " + Position.ID);
+            Jeu.writerCommandes.flush();
+            ligne = Jeu.readerCommandes.readLine();
             if (ligne.equals("P")) {
                 cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
                 cStat.setInt(1, 1);
@@ -59,46 +60,24 @@ public class Joueur {
             } else if (ligne.equals("T")) {
                 //TODO mettre à jour la bd
                 System.out.println("troll");
-                write.println("FREE");
-                write.flush();
+                Jeu.writerCommandes.println("FREE");
+                Jeu.writerCommandes.flush();
+                Jeu.readerCommandes.readLine();
             } else if (ligne.equals("G")) {
                 //TODO mettre à jour la bd
-                write.println("FREE");
-                write.flush();
+                Jeu.writerCommandes.println("FREE");
+                Jeu.writerCommandes.flush();
+                Jeu.readerCommandes.readLine();
             }
             Jeu.actions.UpdateStats();
-            reader.close();
-            write.close();
             if(cStat != null){
                 cStat.clearParameters();
                 cStat.close();
             }
-            Serveur_Prof.close();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    class ChangerCouleur implements Runnable {
-        Noeud nouveauNoeud;
-
-        ChangerCouleur(Noeud noeud) {
-            nouveauNoeud = noeud;
-        }
-
-        @Override
-        public void run() {
-            if (Position != null) {
-                Position.setFill(Color.BLACK);
-                Position.enter = Color.GRAY;
-                Position.exit = Color.BLACK;
-            }
-            Position = nouveauNoeud;
-            Position.setFill(Color.RED);
-            Position.enter = Color.RED;
-            Position.exit = Color.DARKRED;
         }
     }
 }

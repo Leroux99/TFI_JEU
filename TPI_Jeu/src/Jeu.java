@@ -27,6 +27,9 @@ public class Jeu extends Application {
     public static Connection CONNEXION = null;
     public static String NomEquipe = "zLeslicornesroses";
 
+    public static Socket Serveur_Prof_Commandes;
+    public static PrintWriter writerCommandes = null;
+    public static BufferedReader readerCommandes = null;
 
     class ContenuNoeuds implements Runnable {
         final private String SEPARATEUR = " ";
@@ -50,6 +53,8 @@ public class Jeu extends Application {
                 boolean fini = false;
                 String ligne = null;
                 String[] nbDinfo;
+                int numNoeud;
+                String nbObj;
 
                 while (!fini) {
                     ligne = read.readLine();
@@ -79,9 +84,15 @@ public class Jeu extends Application {
     }
 
     public void getStartpoint() {
-        //TODO Recevoir le ID du noeud de départ
-        //joueur = new Joueur(carte.getNoeud(ID));
-        joueur = new Joueur(carte.getNoeuds().get(1));
+        try {
+
+            // Lecture/écriture
+            writerCommandes.println("NODE");
+            writerCommandes.flush();
+            joueur = new Joueur(carte.getNoeuds().get(Integer.parseInt(readerCommandes.readLine())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void chargerLePilote() {
@@ -125,12 +136,9 @@ public class Jeu extends Application {
         Socket Serveur_Prof;
         PrintWriter write;
         try {
-            Serveur_Prof = new Socket(ADRESSE_PROF, PORT_PROF_COMMANDES);
-            write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
-            write.println("HELLO " + NomEquipe + " " + Inet4Address.getLocalHost().getHostAddress());
-            write.flush();
-            write.close();
-            Serveur_Prof.close();
+            writerCommandes.println("HELLO " + NomEquipe + " " + Inet4Address.getLocalHost().getHostAddress());
+            writerCommandes.flush();
+            readerCommandes.readLine();
         } catch (IOException e) {
         }
     }
@@ -138,6 +146,7 @@ public class Jeu extends Application {
     @Override
     public void start(Stage stage) {
         chargerLePilote();
+        initCommandes();
         if (ouvrirConnection()) {
             Identification();
             getStartpoint();
@@ -178,16 +187,13 @@ public class Jeu extends Application {
     }
 
     public void Quitter() {
-        Socket Serveur_Prof;
-        PrintWriter write;
+        fermerConnection();
         try {
-            Serveur_Prof = new Socket(ADRESSE_PROF, PORT_PROF_COMMANDES);
-            write = new PrintWriter(
-                    new OutputStreamWriter(Serveur_Prof.getOutputStream()));
-            write.println("QUIT");
-            write.flush();
-            write.close();
-            Serveur_Prof.close();
+            writerCommandes.println("QUIT");
+            writerCommandes.flush();
+            writerCommandes.close();
+            readerCommandes.close();
+            Serveur_Prof_Commandes.close();
 
         } catch (IOException e) {
         }
@@ -195,6 +201,16 @@ public class Jeu extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public void initCommandes(){
+        try {
+            Serveur_Prof_Commandes = new Socket(ADRESSE_PROF, PORT_PROF_COMMANDES);
+            readerCommandes = new BufferedReader(new InputStreamReader(Serveur_Prof_Commandes.getInputStream()));
+            writerCommandes = new PrintWriter(new OutputStreamWriter(Serveur_Prof_Commandes.getOutputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

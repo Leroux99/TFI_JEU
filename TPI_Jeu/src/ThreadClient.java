@@ -11,12 +11,10 @@ import java.util.List;
 public class ThreadClient implements Runnable {
     private BufferedReader readerLigneClient;
     private PrintWriter writer;
-    private PrintWriter writerFrancois;
     private Socket socClientActuel = null;
     private String IDClient = "";
     private CallableStatement cStat = null;
     private ResultSet resultSet = null;
-    private Socket Serveur_Prof;
     private final String SEPARATEUR = " ";
     private String noeudID = "";
 
@@ -28,10 +26,8 @@ public class ThreadClient implements Runnable {
     @Override
     public void run() {
         try {
-            Serveur_Prof = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_COMMANDES);
             readerLigneClient = new BufferedReader(new InputStreamReader(socClientActuel.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(socClientActuel.getOutputStream(), "UTF-8"), true);
-            writerFrancois = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream(), "UTF-8"), true);
             Integer numQuestion;
             List<Integer> numReponses = new ArrayList<Integer>();
 
@@ -95,14 +91,13 @@ public class ThreadClient implements Runnable {
             cStat.clearParameters();
             cStat.close();
             // Dire a francois d'unlock le joueur
-            writerFrancois.println("UNLOCK " + IDClient);
-            writerFrancois.flush();
+            Jeu.writerCommandes.println("UNLOCK " + IDClient);
+            Jeu.writerCommandes.flush();
+            Jeu.readerCommandes.readLine();
             // close
             readerLigneClient.close();
             writer.close();
-            writerFrancois.close();
             socClientActuel.close();
-            Serveur_Prof.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (SQLException e) {
