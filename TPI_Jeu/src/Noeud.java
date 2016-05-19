@@ -21,7 +21,6 @@ public class Noeud extends Circle{
     public Boolean focused = false;
     public Color enter = Color.GRAY;
     public Color exit = Color.BLACK;
-    public Boolean isEmpty;
 
     Noeud(int ID, int Position_X, int Position_Y, Boolean Constructible){
         super(Position_X, Position_Y, 10, Color.BLACK);
@@ -80,7 +79,32 @@ public class Noeud extends Circle{
         @Override
         public void run(){
             if(Jeu.joueur.Position.ID == ID){
-                playerColors();
+                enter= Color.RED;
+                exit = Color.DARKRED;
+            }
+            else if(Gobelin){
+                enter = Color.LIGHTPINK;
+                exit = Color.PINK;
+            }
+            else if(Troll){
+                enter=Color.WHITE;
+                exit = Color.LIGHTGREY;
+            }
+            else if(Or){
+                enter= Color.LIGHTYELLOW;
+                exit = Color.YELLOW;
+            }
+            else if(MountainDew){
+                enter = Color.MEDIUMPURPLE;
+                exit = Color.PURPLE;
+            }
+            else if(Doritos){
+                enter = Color.ORANGE;
+                exit = Color.DARKORANGE;
+            }
+            else{
+                enter = Color.GRAY;
+                exit = Color.BLACK;
             }
             if(focused) setFill(enter);
             else setFill(exit);
@@ -103,15 +127,5 @@ public class Noeud extends Circle{
 
     public void UpdateColors(){
         Platform.runLater(new ChangerCouleur());
-    }
-
-    public void defaultColors(){
-        exit = Color.BLACK;
-        enter = Color.GRAY;
-    }
-
-    public void playerColors(){
-        exit = Color.DARKRED;
-        enter = Color.RED;
     }
 }

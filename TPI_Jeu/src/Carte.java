@@ -76,35 +76,19 @@ public class Carte {
         for(int i = 0; i < Infos.size(); i++){
             String[] Temp = Infos.get(i).split(":");
             try {
-                if (Temp[1].equals("T")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Troll = true;
-                else if (Temp[1].equals("G")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Gobelin = true;
-                else if (Temp[1].equals("P")){
-                    Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
-                    n.Or = true;
-                    n.exit = Color.YELLOW;
-                    n.enter = Color.LIGHTYELLOW;
-                    n.UpdateColors();
-                }
-                else if (Temp[1].equals("M")){
-                    Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
-                    n.MountainDew = true;
-                    n.exit = Color.PURPLE;
-                    n.enter = Color.MEDIUMPURPLE;
-                    n.UpdateColors();
-                }
-                else if (Temp[1].equals("D")){
-                    Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
-                    n.Doritos = true;
-                    n.exit = Color.DARKORANGE;
-                    n.enter = Color.ORANGE;
-                    n.UpdateColors();
-                }
-                else if (Temp[1].equals("A")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.auberge;
-                else if (Temp[1].equals("N")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.manoir;
-                else if (Temp[1].equals("C")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.chateau;
+                Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
+                if (Temp[1].equals("T")) n.Troll = true;
+                else if (Temp[1].equals("G")) n.Gobelin = true;
+                else if (Temp[1].equals("P")) n.Or = true;
+                else if (Temp[1].equals("M")) n.MountainDew = true;
+                else if (Temp[1].equals("D")) n.Doritos = true;
+                else if (Temp[1].equals("A")) n.batiment = Noeud.typebatiment.auberge;
+                else if (Temp[1].equals("N")) n.batiment = Noeud.typebatiment.manoir;
+                else if (Temp[1].equals("C")) n.batiment = Noeud.typebatiment.chateau;
             }
             catch(Exception e){}
         }
+        for(Noeud n : Noeuds) n.UpdateColors();
 
 
 

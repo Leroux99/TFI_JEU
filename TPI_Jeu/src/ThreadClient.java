@@ -17,6 +17,7 @@ public class ThreadClient implements Runnable {
     private ResultSet resultSet = null;
     private final String SEPARATEUR = " ";
     private String noeudID = "";
+    private final int PRIXQUESTION = 2;
 
 
     ThreadClient(Socket socClient) {
@@ -85,7 +86,7 @@ public class ThreadClient implements Runnable {
                 writer.println("OK");
             } else {
                 writer.println("ERR");
-                // TODO le client dois nous payer
+                updateOr(PRIXQUESTION);
             }
             writer.flush();
             cStat.clearParameters();
@@ -103,5 +104,19 @@ public class ThreadClient implements Runnable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateOr(int amount){
+        CallableStatement cStat = null;
+        try {
+            cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
+            cStat.setInt(1, amount);
+            cStat.executeUpdate();
+            Jeu.actions.UpdateStats();
+            if(cStat != null){
+                cStat.clearParameters();
+                cStat.close();
+            }
+        }catch(SQLException e){}
     }
 }

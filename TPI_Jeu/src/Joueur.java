@@ -1,3 +1,5 @@
+import oracle.jdbc.OracleTypes;
+
 import java.io.*;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -6,9 +8,12 @@ public class Joueur {
 
     public Noeud Position;
 
+    private final int PRIXMOUNTAINDEW = 1;
+    private final int PRIXDORITOS = 1;
+    private final int PRIXOR = 3;
+
     Joueur(Noeud noeud) {
         Position = noeud;
-        Position.playerColors();
         Position.UpdateColors();
     }
 
@@ -16,28 +21,19 @@ public class Joueur {
         Boolean cheminExists = false;
         for (Integer chemin_ID : Position.Chemins)
             if (noeud.ID == chemin_ID) cheminExists = true;
-        //c'était une patch temporaire
-        /*if(!cheminExists)
-            for(Integer chemin_ID : noeud.Chemins)
-                if(Position.ID == chemin_ID) cheminExists = true;*/
 
         if (cheminExists) {
-            Position.defaultColors();
-            Position.UpdateColors();
-            Position = noeud;
-            Position.playerColors();
-            Position.UpdateColors();
-            EnvoyerDeplacement();
-            //TODO recevoir la réponse du serveur
+            EnvoyerDeplacement(noeud);
         }
     }
 
-    public void EnvoyerDeplacement() {
+    public void EnvoyerDeplacement(Noeud noeudCible) {
         CallableStatement cStat = null;
         String ligne;
         String ipProprietaire = "";
+        Boolean peutSeDeplacer = true;
         try {
-            Jeu.writerCommandes.println("GOTO " + Position.ID);
+            Jeu.writerCommandes.println("GOTO " + noeudCible.ID);
             Jeu.writerCommandes.flush();
             ligne = Jeu.readerCommandes.readLine();
             if (ligne.equals("P")) {
@@ -56,25 +52,130 @@ public class Joueur {
                 ipProprietaire = ligne.substring(3);
                 Question.Show(ipProprietaire);
             } else if (ligne.equals("T")) {
-                //TODO mettre à jour la bd
-                Jeu.writerCommandes.println("FREE");
+                payerTroll();
+                Jeu.writerCommandes.println("NODE");
                 Jeu.writerCommandes.flush();
-                Jeu.readerCommandes.readLine();
+                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
             } else if (ligne.equals("G")) {
-                //TODO mettre à jour la bd
-                Jeu.writerCommandes.println("FREE");
+                payerGobelin();
+                Jeu.writerCommandes.println("NODE");
                 Jeu.writerCommandes.flush();
-                Jeu.readerCommandes.readLine();
-            }
+                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+
+            }else if(ligne.equals("ERR")) peutSeDeplacer = false;
             Jeu.actions.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
                 cStat.close();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+            if(peutSeDeplacer) setPosition(noeudCible);
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setPosition(Noeud noeud){
+        Position = noeud;
+        Position.UpdateColors();
+    }
+
+    private void payerTroll(){
+        CallableStatement cStat = null;
+        try {
+            if (getMountainDew() >= PRIXMOUNTAINDEW) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_MOUNTAINDEW(?)}");
+                cStat.setInt(1, -PRIXMOUNTAINDEW);
+                cStat.executeUpdate();
+                Jeu.writerCommandes.println("FREE");
+                Jeu.writerCommandes.flush();
+                Jeu.readerCommandes.readLine();
+            } else if (getGold() >= PRIXOR) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
+                cStat.setInt(1, -PRIXOR);
+                cStat.executeUpdate();
+                Jeu.writerCommandes.println("FREE");
+                Jeu.writerCommandes.flush();
+                Jeu.readerCommandes.readLine();
+            } else System.out.println("rip");
+            Jeu.actions.UpdateStats();
+            if(cStat != null){
+                cStat.clearParameters();
+                cStat.close();
+            }
+        }catch(IOException | SQLException e){}
+    }
+
+    private void payerGobelin(){
+        CallableStatement cStat = null;
+        try {
+            if (getDoritos() >= PRIXDORITOS) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_DORITOS(?)}");
+                cStat.setInt(1, -PRIXDORITOS);
+                cStat.executeUpdate();
+                Jeu.writerCommandes.println("FREE");
+                Jeu.writerCommandes.flush();
+                Jeu.readerCommandes.readLine();
+            } else if (getGold() >= PRIXOR) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
+                cStat.setInt(1, -PRIXOR);
+                cStat.executeUpdate();
+                Jeu.writerCommandes.println("FREE");
+                Jeu.writerCommandes.flush();
+                Jeu.readerCommandes.readLine();
+            } else System.out.println("rip");
+            Jeu.actions.UpdateStats();
+            if(cStat != null){
+                cStat.clearParameters();
+                cStat.close();
+            }
+        }catch(IOException | SQLException e){}
+    }
+
+    private int getGold(){
+        CallableStatement cStat;
+        int or = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Or()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            or = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return or;
+    }
+
+    private int getDoritos(){
+        CallableStatement cStat;
+        int doritos = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Doritos()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            doritos = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return doritos;
+    }
+
+    private int getMountainDew(){
+        CallableStatement cStat;
+        int mountainDew = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_MountainDew()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            mountainDew = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return mountainDew;
     }
 }

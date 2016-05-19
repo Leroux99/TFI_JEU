@@ -1,5 +1,6 @@
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import oracle.jdbc.OracleTypes;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class Question {
+    private static final int PRIXOR = 2;
 
     public static void Show(String ipProprietaire) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Question");
-        //TODO Get la question
         CallableStatement cStat = null;
         Socket Soc_Proprietaire;
         final int portProprietaire = 1666;
@@ -44,7 +45,6 @@ public class Question {
         alert.setHeaderText(contenu.get(0));
 
         StringBuffer reponses = new StringBuffer();
-        //TODO Get les réponses
         reponses.append(contenu.get(1) + "\r\n");
         reponses.append(contenu.get(2) + "\r\n");
         reponses.append(contenu.get(3) + "\r\n");
@@ -76,21 +76,48 @@ public class Question {
             ligne = reader.readLine();
             while (ligne == null) ligne = reader.readLine();
 
-            if (ligne.equals("OK")) {
-                // ???
-            } else if(ligne.equals("ERR")){
-                // payer le proprio pour continuer NOM DE PROCEDURE RANDOM!! À VÉRIFIER...
-                /*cStat = Jeu.CONNEXION.prepareCall(" { call TP_ORDRAGON.PAYER(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();*/
-                System.out.println("PAYER");
-            }
+            if(ligne.equals("ERR"))
+                updateOr(-PRIXOR);
+
             writer.close();
             reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-        } /*catch (SQLException e) {
+        }
+    }
+
+    private static void updateOr(int amount){
+        CallableStatement cStat = null;
+        try {
+            if (getGold() >= PRIXOR) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
+                cStat.setInt(1, amount);
+                cStat.executeUpdate();
+            } else{
+                System.out.println("rip");
+                System.exit(1);
+            }
+            Jeu.actions.UpdateStats();
+            if(cStat != null){
+                cStat.clearParameters();
+                cStat.close();
+            }
+        }catch(SQLException e){}
+    }
+
+    private static int getGold(){
+        CallableStatement cStat;
+        int or = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Or()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            or = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
             e.printStackTrace();
-        }*/
+        }
+        return or;
     }
 }

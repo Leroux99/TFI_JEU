@@ -30,6 +30,8 @@ public class Actions {
 
     private final int PAUSE = 3000;
 
+    private final int PRIXBATIMENT = 3;
+
     public Actions() {
         UpdateStats();
 
@@ -82,31 +84,47 @@ public class Actions {
         CallableStatement cStat = null;
         String ligne;
         try {
-            Jeu.writerCommandes.println("BUILD");
-            Jeu.writerCommandes.flush();
-            ligne = Jeu.readerCommandes.readLine();
-            if (ligne.equals("AUB")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Auberge(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();
-                resultatConstruire.setText("AUBERGE AJOUTÉ !");
-                new AfficherResultatConstruire().start();
-            } else if (ligne.equals("MAN")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Manoire(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();
-                resultatConstruire.setText("MANOIR AJOUTÉ !");
-                new AfficherResultatConstruire().start();
-            } else if (ligne.equals("CHA")) {
-                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Chateaux(?)}");
-                cStat.setInt(1, 1);
-                cStat.executeUpdate();
-                resultatConstruire.setText("CHATEAU AJOUTÉ !");
-                new AfficherResultatConstruire().start();
+            if(getOr() >= PRIXBATIMENT) {
+                Jeu.writerCommandes.println("BUILD");
+                Jeu.writerCommandes.flush();
+                ligne = Jeu.readerCommandes.readLine();
+                if (ligne.equals("AUB")) {
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Auberge(?)}");
+                    cStat.setInt(1, 1);
+                    cStat.executeUpdate();
+                    resultatConstruire.setText("AUBERGE AJOUTÉ !");
+                    new AfficherResultatConstruire().start();
+                } else if (ligne.equals("MAN")) {
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Manoire(?)}");
+                    cStat.setInt(1, 1);
+                    cStat.executeUpdate();
+                    resultatConstruire.setText("MANOIR AJOUTÉ !");
+                    new AfficherResultatConstruire().start();
+                } else if (ligne.equals("CHA")) {
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Chateaux(?)}");
+                    cStat.setInt(1, 1);
+                    cStat.executeUpdate();
+                    resultatConstruire.setText("CHATEAU AJOUTÉ !");
+                    new AfficherResultatConstruire().start();
+                }
+                if(!ligne.equals("ERR")){
+                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Or(?)}");
+                    cStat.setInt(1, -PRIXBATIMENT);
+                    cStat.executeUpdate();
+                    UpdateStats();
+                }
+                else{
+                    resultatConstruire.setText("Impossible de construire!");
+                    new AfficherResultatConstruire().start();
+                }
+                if (cStat != null) {
+                    cStat.clearParameters();
+                    cStat.close();
+                }
             }
-            if(cStat != null) {
-                cStat.clearParameters();
-                cStat.close();
+            else{
+                resultatConstruire.setText("Or insuffisant!");
+                new AfficherResultatConstruire().start();
             }
 
         } catch (SQLException se) {
@@ -119,11 +137,7 @@ public class Actions {
     public void UpdateStats(){
         CallableStatement cStat;
         try{
-            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Or()}");
-            cStat.registerOutParameter(1, OracleTypes.INTEGER);
-            cStat.execute();
-            or.setText("Or: " + cStat.getInt(1));
-            cStat.clearParameters();
+            or.setText("Or: " + getOr());
 
             cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_MountainDew()}");
             cStat.registerOutParameter(1, OracleTypes.INTEGER);
@@ -156,5 +170,21 @@ public class Actions {
             }
             resultatConstruire.setVisible(false);
         }
+    }
+
+    private Integer getOr(){
+        CallableStatement cStat;
+        Integer orAmount = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Or()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            orAmount = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return orAmount;
     }
 }
