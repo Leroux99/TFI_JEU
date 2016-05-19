@@ -1,9 +1,4 @@
-import javafx.application.Platform;
-import javafx.geometry.Pos;
-import javafx.scene.paint.Color;
-
 import java.io.*;
-import java.net.Socket;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 
@@ -13,18 +8,23 @@ public class Joueur {
 
     Joueur(Noeud noeud) {
         Position = noeud;
-        noeud.UpdateColors();
+        Position.playerColors();
+        Position.UpdateColors();
     }
 
     public void seDeplacer(Noeud noeud) {
         Boolean cheminExists = false;
-        for (Integer chemin_ID : Position.Chemins) {
+        for (Integer chemin_ID : Position.Chemins)
             if (noeud.ID == chemin_ID) cheminExists = true;
-        }
+        if(!cheminExists)
+            for(Integer chemin_ID : noeud.Chemins)
+                if(Position.ID == chemin_ID) cheminExists = true;
+
         if (cheminExists) {
-            Noeud temp = Position;
+            Position.defaultColors();
+            Position.UpdateColors();
             Position = noeud;
-            temp.UpdateColors();
+            Position.playerColors();
             Position.UpdateColors();
             EnvoyerDeplacement();
             //TODO recevoir la réponse du serveur
@@ -33,9 +33,6 @@ public class Joueur {
 
     public void EnvoyerDeplacement() {
         CallableStatement cStat = null;
-        Socket Serveur_Prof;
-        PrintWriter write;
-        BufferedReader reader;
         String ligne;
         String ipProprietaire = "";
         try {
@@ -59,7 +56,6 @@ public class Joueur {
                 Question.Show(ipProprietaire);
             } else if (ligne.equals("T")) {
                 //TODO mettre à jour la bd
-                System.out.println("troll");
                 Jeu.writerCommandes.println("FREE");
                 Jeu.writerCommandes.flush();
                 Jeu.readerCommandes.readLine();
