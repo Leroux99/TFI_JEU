@@ -44,10 +44,8 @@ public class Jeu extends Application {
                 //connection server
                 Serveur_Prof = new Socket(ADRESSE_PROF, PORT_PROF_JOUEURS);
                 //traiter les envoit du server.
-                read = new BufferedReader(
-                        new InputStreamReader(Serveur_Prof.getInputStream()));
-                write = new PrintWriter(
-                        new OutputStreamWriter(Serveur_Prof.getOutputStream()));
+                read = new BufferedReader(new InputStreamReader(Serveur_Prof.getInputStream()));
+                write = new PrintWriter(new OutputStreamWriter(Serveur_Prof.getOutputStream()));
 
                 // Lecture/écriture
                 boolean fini = false;
@@ -96,7 +94,6 @@ public class Jeu extends Application {
     }
 
     public void chargerLePilote() {
-        // Méthode 1 pour charger le pilote
         try {
             DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
             System.out.println("Pilote chargé");
@@ -133,8 +130,6 @@ public class Jeu extends Application {
     }
 
     public void Identification() {
-        Socket Serveur_Prof;
-        PrintWriter write;
         try {
             writerCommandes.println("HELLO " + NomEquipe + " " + Inet4Address.getLocalHost().getHostAddress());
             writerCommandes.flush();
