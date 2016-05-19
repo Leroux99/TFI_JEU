@@ -16,9 +16,10 @@ public class Joueur {
         Boolean cheminExists = false;
         for (Integer chemin_ID : Position.Chemins)
             if (noeud.ID == chemin_ID) cheminExists = true;
-        if(!cheminExists)
+        //c'était une patch temporaire
+        /*if(!cheminExists)
             for(Integer chemin_ID : noeud.Chemins)
-                if(Position.ID == chemin_ID) cheminExists = true;
+                if(Position.ID == chemin_ID) cheminExists = true;*/
 
         if (cheminExists) {
             Position.defaultColors();
