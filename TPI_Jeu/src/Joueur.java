@@ -32,16 +32,8 @@ public class Joueur {
         CallableStatement cStat = null;
         String ligne;
         String ipProprietaire = "";
-        Boolean peutSeDeplacer = true;
-
-        Integer noeud_en_cours;
 
         try {
-            Jeu.writerCommandes.println("NODE");
-            Jeu.writerCommandes.flush();
-            noeud_en_cours = Integer.parseInt(Jeu.readerCommandes.readLine());
-
-            if(noeud_en_cours == Position.ID) {
                 Jeu.writerCommandes.println("GOTO " + noeudCible.ID);
                 Jeu.writerCommandes.flush();
                 ligne = Jeu.readerCommandes.readLine();
@@ -72,17 +64,18 @@ public class Joueur {
                     Jeu.writerCommandes.flush();
                     noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
 
-                } else if (ligne.equals("ERR")) peutSeDeplacer = false;
+                } else if (ligne.equals("ERR")){
+                    Jeu.writerCommandes.println("NODE");
+                    Jeu.writerCommandes.flush();
+                    noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+                }
                 Jeu.actions.UpdateStats();
                 if (cStat != null) {
                     cStat.clearParameters();
                     cStat.close();
                 }
-                if (peutSeDeplacer) setPosition(noeudCible);
-            }
-            else{
-                setPosition(new Carte().getNoeud(noeud_en_cours));
-            }
+                setPosition(noeudCible);
+
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }

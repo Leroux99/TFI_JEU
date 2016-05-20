@@ -76,21 +76,18 @@ public class Carte {
         for(int i = 0; i < Infos.size(); i++){
             String[] Temp = Infos.get(i).split(":");
             try {
-                Noeud n = Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0])));
-                if (Temp[1].equals("T")) n.Troll = true;
-                else if (Temp[1].equals("G")) n.Gobelin = true;
-                else if (Temp[1].equals("P")) n.Or = true;
-                else if (Temp[1].equals("M")) n.MountainDew = true;
-                else if (Temp[1].equals("D")) n.Doritos = true;
-                else if (Temp[1].equals("A")) n.batiment = Noeud.typebatiment.auberge;
-                else if (Temp[1].equals("N")) n.batiment = Noeud.typebatiment.manoir;
-                else if (Temp[1].equals("C")) n.batiment = Noeud.typebatiment.chateau;
+                if (Temp[1].equals("T")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Troll = true;
+                else if (Temp[1].equals("G")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Gobelin = true;
+                else if (Temp[1].equals("P")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Or = true;
+                else if (Temp[1].equals("M")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).MountainDew = true;
+                else if (Temp[1].equals("D")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Doritos = true;
+                else if (Temp[1].equals("A")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.auberge;
+                else if (Temp[1].equals("N")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.manoir;
+                else if (Temp[1].equals("C")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.chateau;
+                else if (Temp[1].equals("J")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Stranger = true;
             }
             catch(Exception e){}
         }
         for(Noeud n : Noeuds) n.UpdateColors();
-
-
-
     }
 }

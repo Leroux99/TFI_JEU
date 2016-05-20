@@ -16,6 +16,7 @@ public class Noeud extends Circle{
     public Boolean Or;
     public Boolean MountainDew;
     public Boolean Doritos;
+    public Boolean Stranger;
     public typebatiment batiment;
     public List<Integer> Chemins = new ArrayList<Integer>();
     public Boolean focused = false;
@@ -36,6 +37,7 @@ public class Noeud extends Circle{
         MountainDew = false;
         Doritos = false;
         batiment = typebatiment.aucun;
+        Stranger = false;
     }
 
     public void gererDeplacement(MouseEvent e){
@@ -64,14 +66,7 @@ public class Noeud extends Circle{
         MountainDew = false;
         Doritos = false;
         batiment = typebatiment.aucun;
-        if(Jeu.joueur.Position.ID == ID){
-            enter = Color.RED;
-            exit = Color.DARKRED;
-        }
-        else{
-            enter = Color.GRAY;
-            exit = Color.BLACK;
-        }
+        Stranger = false;
     }
 
     class ChangerCouleur implements Runnable{
@@ -81,32 +76,28 @@ public class Noeud extends Circle{
             if(Jeu.joueur.Position.ID == ID){
                 enter= Color.RED;
                 exit = Color.DARKRED;
-            }
-            else if(Gobelin){
+            } else if(Gobelin){
                 enter = Color.LIGHTPINK;
                 exit = Color.PINK;
-            }
-            else if(Troll){
+            } else if(Troll){
                 enter=Color.WHITE;
                 exit = Color.LIGHTGREY;
-            }
-            else if(batiment != typebatiment.aucun){
+            } else if(batiment != typebatiment.aucun){
                 enter = Color.LIGHTBLUE;
                 exit = Color.BLUE;
-            }
-            else if(Or){
+            } else if(Or){
                 enter= Color.LIGHTYELLOW;
                 exit = Color.YELLOW;
-            }
-            else if(MountainDew){
+            } else if(MountainDew){
                 enter = Color.MEDIUMPURPLE;
                 exit = Color.PURPLE;
-            }
-            else if(Doritos){
+            } else if(Doritos){
                 enter = Color.ORANGE;
                 exit = Color.DARKORANGE;
-            }
-            else{
+            } else if(Stranger){
+                enter = Color.LIGHTSTEELBLUE;
+                exit = Color.STEELBLUE;
+            } else{
                 enter = Color.GRAY;
                 exit = Color.BLACK;
             }
