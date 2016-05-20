@@ -12,6 +12,9 @@ public class Joueur {
     private final int PRIXMOUNTAINDEW = 1;
     private final int PRIXDORITOS = 1;
     private final int PRIXOR = 3;
+    private final int PRISON_TROLL = 53;
+    private final int PRISON_GOBELIN = 79;
+
 
     Joueur(Noeud noeud) {
         Position = noeud;
@@ -34,47 +37,49 @@ public class Joueur {
         String ipProprietaire = "";
 
         try {
-                Jeu.writerCommandes.println("GOTO " + noeudCible.ID);
+            Jeu.writerCommandes.println("GOTO " + noeudCible.ID);
+            Jeu.writerCommandes.flush();
+            ligne = Jeu.readerCommandes.readLine();
+            if (ligne.equals("P")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+            } else if (ligne.equals("M")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_MOUNTAINDEW(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+            } else if (ligne.equals("D")) {
+                cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_DORITOS(?)}");
+                cStat.setInt(1, 1);
+                cStat.executeUpdate();
+            } else if (ligne.contains("IP")) {
+                System.out.println(ligne);
+                ipProprietaire = ligne.substring(3);
+                Question.Show(ipProprietaire);
+            } else if (ligne.equals("T")) {
+                payerTroll();
+                Jeu.writerCommandes.println("NODE");
                 Jeu.writerCommandes.flush();
-                ligne = Jeu.readerCommandes.readLine();
-                if (ligne.equals("P")) {
-                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
-                    cStat.setInt(1, 1);
-                    cStat.executeUpdate();
-                } else if (ligne.equals("M")) {
-                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_MOUNTAINDEW(?)}");
-                    cStat.setInt(1, 1);
-                    cStat.executeUpdate();
-                } else if (ligne.equals("D")) {
-                    cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_DORITOS(?)}");
-                    cStat.setInt(1, 1);
-                    cStat.executeUpdate();
-                } else if (ligne.contains("IP")) {
-                    System.out.println(ligne);
-                    ipProprietaire = ligne.substring(3);
-                    Question.Show(ipProprietaire);
-                } else if (ligne.equals("T")) {
-                    payerTroll();
-                    Jeu.writerCommandes.println("NODE");
-                    Jeu.writerCommandes.flush();
-                    noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
-                } else if (ligne.equals("G")) {
-                    payerGobelin();
-                    Jeu.writerCommandes.println("NODE");
-                    Jeu.writerCommandes.flush();
-                    noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+            } else if (ligne.equals("G")) {
+                payerGobelin();
+                Jeu.writerCommandes.println("NODE");
+                Jeu.writerCommandes.flush();
+                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
 
-                } else if (ligne.equals("ERR")){
-                    Jeu.writerCommandes.println("NODE");
-                    Jeu.writerCommandes.flush();
-                    noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
-                }
-                Jeu.actions.UpdateStats();
-                if (cStat != null) {
-                    cStat.clearParameters();
-                    cStat.close();
-                }
-                setPosition(noeudCible);
+            } else if (ligne.equals("ERR")){
+                Jeu.writerCommandes.println("NODE");
+                Jeu.writerCommandes.flush();
+                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
+                if(noeudCible.ID == PRISON_TROLL) payerTroll();
+                else if(noeudCible.ID == PRISON_GOBELIN) payerGobelin();
+            }
+            Jeu.actions.UpdateStats();
+            if (cStat != null) {
+                cStat.clearParameters();
+                cStat.close();
+            }
+            setPosition(noeudCible);
 
         } catch (SQLException | IOException e) {
             e.printStackTrace();

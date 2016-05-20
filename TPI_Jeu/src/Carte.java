@@ -84,7 +84,6 @@ public class Carte {
                 else if (Temp[1].equals("A")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.auberge;
                 else if (Temp[1].equals("N")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.manoir;
                 else if (Temp[1].equals("C")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).batiment = Noeud.typebatiment.chateau;
-                else if (Temp[1].equals("J")) Noeuds.get(getNoeudIndex(Integer.parseInt(Temp[0]))).Stranger = true;
             }
             catch(Exception e){}
         }
