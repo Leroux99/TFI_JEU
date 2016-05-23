@@ -15,12 +15,11 @@ public class NotreServeur implements Runnable{
             boolean fini = false;
             while (!fini) {
                 try {
-                        // Étape 1 : attente d'une demande d'un client (connexion)
-                        socClient = socServeur.accept();
-                        // Étape 2: créé thread client
-                        Thread tClient = new Thread(new ThreadClient(socClient));
-                        tClient.start();
-
+                    // Étape 1 : attente d'une demande d'un client (connexion)
+                    socClient = socServeur.accept();
+                    // Étape 2: créé thread client
+                    Thread tClient = new Thread(new ThreadClient(socClient));
+                    tClient.start();
                 } catch (Exception ex) {
                     System.out.print(ex.getMessage());
                 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Information {
     List<Text> infos = new ArrayList<Text>();
-
     Text or = new Text(10,20, "Or: ");
     Text doritos = new Text(10,50, "Doritos: ");
     Text mountaindew = new Text(10, 80, "Mountain Dew: ");
@@ -24,10 +23,7 @@ public class Information {
         infos.add(constructible);
         infos.add(batiment);
 
-        for(Text t : infos){
-            t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        }
-
+        for(Text t : infos) t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         HideText();
     }
 
@@ -52,15 +48,10 @@ public class Information {
     }
 
     public void HideText(){
-        for(Text t : infos){
-            t.setVisible(false);
-        }
+        for(Text t : infos) t.setVisible(false);
     }
 
     public void ShowText(){
-        for(Text t : infos){
-            t.setVisible(true);
-        }
+        for(Text t : infos)t.setVisible(true);
     }
-
 }

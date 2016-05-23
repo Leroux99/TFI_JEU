@@ -1,14 +1,12 @@
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import java.io.*;
 import java.net.Inet4Address;
 import java.net.Socket;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,21 +17,18 @@ public class Jeu extends Application {
     final static public int PORT_PROF_COMMANDES = 51007;
     final static public int PORT_PROF_JOUEURS = 51006;
     final static public int PORT_PROF_CARTE = 51005;
-
     Carte carte = new Carte(); //notre carte
     public static Joueur joueur; //Notre joueur (static pour être accessible partout)
     public static Information infos;
     public static Actions actions;
     public static Connection CONNEXION = null;
     public static String NomEquipe = "zLeslicornesroses";
-
     public static Socket Serveur_Prof_Commandes;
     public static PrintWriter writerCommandes = null;
     public static BufferedReader readerCommandes = null;
 
     class ContenuNoeuds implements Runnable {
         final private String SEPARATEUR = " ";
-
         public ArrayList listeContenu = new ArrayList();
         private Socket Serveur_Prof = null;
         private BufferedReader read;
@@ -51,8 +46,6 @@ public class Jeu extends Application {
                 boolean fini = false;
                 String ligne = null;
                 String[] nbDinfo;
-                int numNoeud;
-                String nbObj;
 
                 while (!fini) {
                     ligne = read.readLine();
@@ -83,7 +76,6 @@ public class Jeu extends Application {
 
     public void getStartpoint() {
         try {
-
             // Lecture/écriture
             writerCommandes.println("NODE");
             writerCommandes.flush();
@@ -140,6 +132,13 @@ public class Jeu extends Application {
 
     @Override
     public void start(Stage stage) {
+        //Lorsque l'application ferme, appelle la méthode Quitter
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                Quitter();
+            }
+        }));
+
         chargerLePilote();
         initCommandes();
         if (ouvrirConnection()) {
@@ -159,16 +158,11 @@ public class Jeu extends Application {
             Scene scene = new Scene(groupe);
 
             stage.setScene(scene);
-            //stage.setWidth(1600);
-            //stage.setHeight(900);
+            stage.setWidth(1600);
+            stage.setHeight(900);
             stage.setTitle("L'or du dragon");
             stage.resizableProperty().setValue(Boolean.FALSE);
             //Quand on quitte le jeu, on envoie "QUIT" au serveur de jeu pour avertir.
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we) {
-                    Quitter();
-                }
-            });
             stage.show();
 
             Thread t = new Thread(new ContenuNoeuds());
@@ -182,6 +176,8 @@ public class Jeu extends Application {
     }
 
     public void Quitter() {
+        ResetQuestions();
+        ResetStats();
         fermerConnection();
         try {
             writerCommandes.println("QUIT");
@@ -192,6 +188,7 @@ public class Jeu extends Application {
 
         } catch (IOException e) {
         }
+        System.out.println("Quitter");
     }
 
     public static void main(String[] args) {
@@ -204,6 +201,32 @@ public class Jeu extends Application {
             readerCommandes = new BufferedReader(new InputStreamReader(Serveur_Prof_Commandes.getInputStream()));
             writerCommandes = new PrintWriter(new OutputStreamWriter(Serveur_Prof_Commandes.getOutputStream()));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ResetQuestions(){
+        CallableStatement cStat = null;
+        try{
+            cStat = CONNEXION.prepareCall(" {call TP_ORDRAGON.Reset_Questions()}");
+            cStat.execute();
+            cStat.clearParameters();
+            cStat.close();
+            System.out.println("Reset Questions");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void ResetStats(){
+        CallableStatement cStat = null;
+        try{
+            cStat = CONNEXION.prepareCall(" {call TP_ORDRAGON.Reset_Stats()}");
+            cStat.execute();
+            cStat.clearParameters();
+            cStat.close();
+            System.out.println("Reset Stats");
+        }catch(SQLException e){
             e.printStackTrace();
         }
     }

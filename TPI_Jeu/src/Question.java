@@ -1,7 +1,6 @@
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import oracle.jdbc.OracleTypes;
-
 import java.io.*;
 import java.net.Socket;
 import java.sql.CallableStatement;
@@ -10,15 +9,14 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class Question {
-    private static final int PRIXOR = 2;
+    private final int PRIXOR = 2;
 
-    public static void Show(String ipProprietaire) {
+    public void Show(String ipProprietaire) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Question");
         CallableStatement cStat = null;
         Socket Soc_Proprietaire;
         final int portProprietaire = 1666;
-        String reponseChoisie;
         BufferedReader reader;
         PrintWriter writer;
         ArrayList<String> contenu = new ArrayList<>();
@@ -35,9 +33,7 @@ public class Question {
             while (!estVide) {
                 ligne = reader.readLine();
                 if(ligne == null) estVide = true;
-                else if (!ligne.equals("")) {
-                    contenu.add(ligne);
-                }
+                else if (!ligne.equals("")) contenu.add(ligne);
                 else estVide = true;
             }
 
@@ -86,17 +82,15 @@ public class Question {
         }
     }
 
-    private static void updateOr(int amount){
+    private void updateOr(int amount){
         CallableStatement cStat = null;
         try {
             if (getGold() >= PRIXOR) {
                 cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
                 cStat.setInt(1, amount);
                 cStat.executeUpdate();
-            } else{
-                System.out.println("rip");
-                System.exit(1);
-            }
+            } else youLose();
+
             Jeu.actions.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
@@ -105,7 +99,7 @@ public class Question {
         }catch(SQLException e){}
     }
 
-    private static int getGold(){
+    private int getGold(){
         CallableStatement cStat;
         int or = 0;
         try{
@@ -119,5 +113,14 @@ public class Question {
             e.printStackTrace();
         }
         return or;
+    }
+
+    private void youLose(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Oh non!");
+        alert.setHeaderText("Vous avez perdu!");
+        alert.setContentText("Décevant..");
+        alert.showAndWait();
+        System.exit(1);
     }
 }

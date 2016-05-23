@@ -1,5 +1,4 @@
 import oracle.jdbc.OracleTypes;
-
 import java.io.*;
 import java.net.Socket;
 import java.sql.CallableStatement;
@@ -73,7 +72,6 @@ public class ThreadClient implements Runnable {
             String ligne = readerLigneClient.readLine();
             while(ligne == null) ligne = readerLigneClient.readLine();
 
-
             // Verifier si bonne reponse
             cStat = Jeu.CONNEXION.prepareCall("{? = call TP_ORDRAGON.Verifier_Reponse(?)}");
             cStat.registerOutParameter(1, OracleTypes.INTEGER);
@@ -82,9 +80,8 @@ public class ThreadClient implements Runnable {
             cStat.execute();
 
             // Envoyer si il a bien répondu ou non
-            if (cStat.getInt(1) == 1) {
-                writer.println("OK");
-            } else {
+            if (cStat.getInt(1) == 1) writer.println("OK");
+            else {
                 writer.println("ERR");
                 updateOr(PRIXQUESTION);
             }

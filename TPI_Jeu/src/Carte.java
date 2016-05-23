@@ -1,4 +1,3 @@
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,10 +19,7 @@ public class Carte {
         Boolean isNoeuds = true;
         try {
             Socket soc = new Socket(Jeu.ADRESSE_PROF, Jeu.PORT_PROF_CARTE);
-
-            BufferedReader reader
-                    = new BufferedReader(
-                    new InputStreamReader(soc.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(soc.getInputStream()));
             do {
                 ligne = reader.readLine();
                 if (ligne != null && ligne.trim().length() > 0) {
@@ -60,9 +56,7 @@ public class Carte {
     public List<Line> getLigneChemins(){return LigneChemins;}
 
     public Noeud getNoeud(int ID){
-        for(int i = 0; i < Noeuds.size(); i++) {
-            if (Noeuds.get(i).getID() == ID) return Noeuds.get(i);
-        }
+        for(int i = 0; i < Noeuds.size(); i++) if (Noeuds.get(i).getID() == ID) return Noeuds.get(i);
         return null;
     }
 

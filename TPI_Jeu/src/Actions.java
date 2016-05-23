@@ -1,5 +1,5 @@
-import javafx.application.Platform;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -7,29 +7,22 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import oracle.jdbc.OracleTypes;
-import oracle.jdbc.oracore.OracleType;
-
 import java.io.*;
-import java.net.Socket;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Actions {
     private List<Text> infos = new ArrayList<Text>();
-
-    private Text or = new Text(1021, 822, null);
-    private Text doritos = new Text(1021, 852, null);
-    private Text mountaindew = new Text(1021, 882, null);
-
+    private Text or = new Text(1021, 796, null);
+    private Text doritos = new Text(1021, 826, null);
+    private Text mountaindew = new Text(1021, 856, null);
     private Rectangle construire = new Rectangle();
     private Text construire_text = new Text("Construire");
-
-    private Text resultatConstruire = new Text(1221, 822, null);
-
+    private Text resultatConstruire = new Text(1171, 796, null);
     private final int PAUSE = 3000;
-
     private final int PRIXBATIMENT = 3;
 
     public Actions() {
@@ -39,12 +32,10 @@ public class Actions {
         infos.add(doritos);
         infos.add(mountaindew);
 
-        for (Text t : infos) {
-            t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        }
+        for (Text t : infos) t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
-        construire.setX(1408);
-        construire.setY(821);
+        construire.setX(1398);
+        construire.setY(795);
         construire.setHeight(59);
         construire.setWidth(179);
         construire.setStroke(Color.GRAY);
@@ -54,14 +45,13 @@ public class Actions {
         construire.setCursor(Cursor.HAND);
 
         construire_text.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
-        construire_text.setX(1458);
-        construire_text.setY(854);
+        construire_text.setX(1448);
+        construire_text.setY(828);
         construire_text.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> gererClic(e));
         construire_text.setCursor(Cursor.HAND);
 
         resultatConstruire.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         resultatConstruire.setVisible(false);
-
     }
 
     public List<Text> getInfos() {
@@ -84,7 +74,11 @@ public class Actions {
         CallableStatement cStat = null;
         String ligne;
         try {
-            if(getOr() >= PRIXBATIMENT) {
+            if (!Jeu.joueur.Position.Constructible){
+                resultatConstruire.setText("Noeud non constructible");
+                new AfficherResultatConstruire().start();
+            }
+            else if(getOr() >= PRIXBATIMENT) {
                 Jeu.writerCommandes.println("BUILD");
                 Jeu.writerCommandes.flush();
                 ligne = Jeu.readerCommandes.readLine();
@@ -112,6 +106,7 @@ public class Actions {
                     cStat.setInt(1, -PRIXBATIMENT);
                     cStat.executeUpdate();
                     UpdateStats();
+                    if(verifierGagner()) youWin();
                 }
                 else{
                     resultatConstruire.setText("Impossible de construire!");
@@ -135,27 +130,9 @@ public class Actions {
     }
 
     public void UpdateStats(){
-        CallableStatement cStat;
-        try{
             or.setText("Or: " + getOr());
-
-            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_MountainDew()}");
-            cStat.registerOutParameter(1, OracleTypes.INTEGER);
-            cStat.execute();
-            mountaindew.setText("Mountain Dew: " + cStat.getInt(1));
-            cStat.clearParameters();
-
-            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Doritos()}");
-            cStat.registerOutParameter(1, OracleTypes.INTEGER);
-            cStat.execute();
-            doritos.setText("Doritos: " + cStat.getInt(1));
-            cStat.clearParameters();
-
-            cStat.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-
+            mountaindew.setText("Mountain Dew: " + getMountainDew());
+            doritos.setText("Doritos: " + getDoritos());
     }
 
     class AfficherResultatConstruire extends Thread{
@@ -186,5 +163,66 @@ public class Actions {
             e.printStackTrace();
         }
         return orAmount;
+    }
+
+    private Integer getDoritos(){
+        CallableStatement cStat;
+        Integer doritosAmount = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Doritos()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            doritosAmount = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return doritosAmount;
+    }
+
+    private Integer getMountainDew(){
+        CallableStatement cStat;
+        Integer mountaindewAmount = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_MountainDew()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            mountaindewAmount = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return mountaindewAmount;
+    }
+
+    private Boolean verifierGagner(){
+        CallableStatement cStat = null;
+        ResultSet rst = null;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Afficher_Stats(?)}");
+            cStat.registerOutParameter(1,OracleTypes.CURSOR);
+            cStat.execute();
+
+            rst = (ResultSet) cStat.getObject(1);
+            rst.next();
+
+            return (rst.getInt("NbAuberges") >= 1 && rst.getInt("NbManoires") >= 1 && rst.getInt("NbChateaux") >= 1);
+        } catch(SQLException e){
+
+        }
+        return false;
+    }
+
+    private void youWin(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Yay!");
+        alert.setHeaderText("Vous avez gagné!");
+        alert.setContentText(null);
+
+        alert.showAndWait();
+
+        System.exit(1);
     }
 }

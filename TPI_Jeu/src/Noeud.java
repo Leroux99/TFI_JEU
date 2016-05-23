@@ -3,7 +3,6 @@ import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
 import java.util.ArrayList;
 import java.util.List;
 

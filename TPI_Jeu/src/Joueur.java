@@ -1,20 +1,14 @@
-import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import oracle.jdbc.OracleTypes;
-
 import java.io.*;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 
 public class Joueur {
-
     public Noeud Position;
-
     private final int PRIXMOUNTAINDEW = 1;
     private final int PRIXDORITOS = 1;
     private final int PRIXOR = 3;
-    //private final int PRISON_TROLL = 53;
-    //private final int PRISON_GOBELIN = 79;
-
 
     Joueur(Noeud noeud) {
         Position = noeud;
@@ -26,9 +20,7 @@ public class Joueur {
         for (Integer chemin_ID : Position.Chemins)
             if (noeud.ID == chemin_ID) cheminExists = true;
 
-        if (cheminExists) {
-            EnvoyerDeplacement(noeud);
-        }
+        if (cheminExists) EnvoyerDeplacement(noeud);
     }
 
     public void EnvoyerDeplacement(Noeud noeudCible) {
@@ -55,7 +47,7 @@ public class Joueur {
             } else if (ligne.contains("IP")) {
                 System.out.println(ligne);
                 ipProprietaire = ligne.substring(3);
-                Question.Show(ipProprietaire);
+                new Question().Show(ipProprietaire);
             } else if (ligne.equals("T")) {
                 payerTroll();
                 Jeu.writerCommandes.println("NODE");
@@ -66,14 +58,7 @@ public class Joueur {
                 Jeu.writerCommandes.println("NODE");
                 Jeu.writerCommandes.flush();
                 noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
-
-            } /*else if (ligne.equals("ERR")){
-                Jeu.writerCommandes.println("NODE");
-                Jeu.writerCommandes.flush();
-                noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
-                if(noeudCible.ID == PRISON_TROLL) payerTroll();
-                else if(noeudCible.ID == PRISON_GOBELIN) payerGobelin();
-            }*/
+            }
             Jeu.actions.UpdateStats();
             if (cStat != null) {
                 cStat.clearParameters();
@@ -110,7 +95,7 @@ public class Joueur {
                 Jeu.writerCommandes.println("FREE");
                 Jeu.writerCommandes.flush();
                 Jeu.readerCommandes.readLine();
-            } else System.out.println("rip");
+            } else youLose();
             Jeu.actions.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
@@ -136,7 +121,7 @@ public class Joueur {
                 Jeu.writerCommandes.println("FREE");
                 Jeu.writerCommandes.flush();
                 Jeu.readerCommandes.readLine();
-            } else System.out.println("rip");
+            } else youLose();
             Jeu.actions.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
@@ -191,5 +176,14 @@ public class Joueur {
             e.printStackTrace();
         }
         return mountainDew;
+    }
+
+    private void youLose(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Oh non!");
+        alert.setHeaderText("Vous avez perdu!");
+        alert.setContentText("Décevant..");
+        alert.showAndWait();
+        System.exit(1);
     }
 }
