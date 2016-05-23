@@ -12,8 +12,8 @@ public class Joueur {
     private final int PRIXMOUNTAINDEW = 1;
     private final int PRIXDORITOS = 1;
     private final int PRIXOR = 3;
-    private final int PRISON_TROLL = 53;
-    private final int PRISON_GOBELIN = 79;
+    //private final int PRISON_TROLL = 53;
+    //private final int PRISON_GOBELIN = 79;
 
 
     Joueur(Noeud noeud) {
@@ -67,13 +67,13 @@ public class Joueur {
                 Jeu.writerCommandes.flush();
                 noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
 
-            } else if (ligne.equals("ERR")){
+            } /*else if (ligne.equals("ERR")){
                 Jeu.writerCommandes.println("NODE");
                 Jeu.writerCommandes.flush();
                 noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
                 if(noeudCible.ID == PRISON_TROLL) payerTroll();
                 else if(noeudCible.ID == PRISON_GOBELIN) payerGobelin();
-            }
+            }*/
             Jeu.actions.UpdateStats();
             if (cStat != null) {
                 cStat.clearParameters();
