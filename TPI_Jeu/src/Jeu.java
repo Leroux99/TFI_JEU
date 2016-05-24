@@ -26,7 +26,7 @@ public class Jeu extends Application {
     public static Socket Serveur_Prof_Commandes;
     public static PrintWriter writerCommandes = null;
     public static BufferedReader readerCommandes = null;
-    public static Boolean isBot = true;
+    public static Bot bot = null;
 
     class ContenuNoeuds implements Runnable {
         final private String SEPARATEUR = " ";
@@ -155,8 +155,9 @@ public class Jeu extends Application {
             groupe.getChildren().addAll(carte.getLigneChemins());
             groupe.getChildren().addAll(carte.getNoeuds());
             groupe.getChildren().addAll(infos.getInfos());
-            groupe.getChildren().addAll(actions.getInfos());
+            groupe.getChildren().addAll(infos.getStats());
             groupe.getChildren().addAll(actions.getConstruire(), actions.getConstruire_text(), actions.getResultatConstruire());
+            groupe.getChildren().addAll(actions.getBot_button(), actions.getBot_text());
 
             Scene scene = new Scene(groupe);
 
@@ -176,11 +177,8 @@ public class Jeu extends Application {
             t2.setDaemon(true);
             t2.start();
 
-            if(isBot){
-                Thread t3 = new Thread(new Bot());
-                t3.setDaemon(true);
-                t3.start();
-            }
+            bot = new Bot();
+            bot.actif = false;
         }
     }
 
@@ -238,5 +236,12 @@ public class Jeu extends Application {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public static void startBot(){
+        bot = new Bot();
+        Thread t3 = new Thread(bot);
+        t3.setDaemon(true);
+        t3.start();
     }
 }

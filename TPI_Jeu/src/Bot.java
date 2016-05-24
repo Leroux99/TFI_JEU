@@ -2,15 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bot implements Runnable {
+    public Boolean actif;
+    public Boolean isWorking;
     private final Integer NEUTRAL = 0;
     private final Integer MONSTRE = -5;
+
+    public Bot(){
+        actif = true;
+        isWorking = false;
+    }
 
     @Override
     public void run() {
         try {
             //Thread.sleep(500);
             Noeud lastPosition = Jeu.joueur.Position;
-            while (true) {
+            while (actif) {
+                isWorking = true;
                 List<Noeud> neutralNoeuds = new ArrayList<Noeud>();
                 List<Noeud> maisonNoeuds = new ArrayList<Noeud>();
                 Integer bestPTS = -10;
@@ -56,6 +64,7 @@ public class Bot implements Runnable {
 
                 essayerConstruire();
                 Thread.sleep(1);
+                isWorking = false;
             }
         }catch(InterruptedException ie) {}
     }

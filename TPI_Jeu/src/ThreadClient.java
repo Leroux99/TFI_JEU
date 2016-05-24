@@ -110,7 +110,7 @@ public class ThreadClient implements Runnable {
             cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.UPDATE_OR(?)}");
             cStat.setInt(1, amount);
             cStat.executeUpdate();
-            Jeu.actions.UpdateStats();
+            Jeu.infos.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
                 cStat.close();

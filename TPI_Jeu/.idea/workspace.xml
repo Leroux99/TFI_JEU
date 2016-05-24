@@ -26,10 +26,9 @@
         <entry file="file://$PROJECT_DIR$/src/Bot.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+              <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
               <folding>
-                <element signature="e#394#401#0" expanded="true" />
-                <element signature="e#461#468#0" expanded="true" />
+                <element signature="method#essayerConstruire#0;class#Bot#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -38,8 +37,8 @@
       <file leaf-file-name="Jeu.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Jeu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5716396">
-              <caret line="146" column="29" selection-start-line="146" selection-start-column="29" selection-end-line="146" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.47267357">
+              <caret line="180" column="30" selection-start-line="180" selection-start-column="30" selection-end-line="180" selection-end-column="30" />
               <folding>
                 <element signature="class#ContenuNoeuds#0;class#Jeu#0" expanded="false" />
                 <element signature="method#run#0;class#ContenuNoeuds#0;class#Jeu#0" expanded="false" />
@@ -48,10 +47,134 @@
                 <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
                 <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
                 <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-                <element signature="class#4867:4962" expanded="false" />
+                <element signature="class#4861:4956" expanded="false" />
                 <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
                 <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
                 <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+                <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+                <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Question.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Question.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding>
+                <element signature="method#getGold#0;class#Question#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThreadClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ThreadClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="112" column="21" selection-start-line="112" selection-start-column="21" selection-end-line="112" selection-end-column="21" />
+              <folding>
+                <element signature="method#run#0;class#ThreadClient#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Actions.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Actions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+              <folding>
+                <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
+                <element signature="method#botClic#0;class#Actions#0" expanded="false" />
+                <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
+                <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
+                <element signature="method#youWin#0;class#Actions#0" expanded="false" />
+                <element signature="method#getOr#0;class#Actions#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Noeud.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Noeud.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+              <folding>
+                <element signature="method#Noeud#0;class#Noeud#0" expanded="false" />
+                <element signature="method#gererEnter#0;class#Noeud#0" expanded="false" />
+                <element signature="method#gererExit#0;class#Noeud#0" expanded="false" />
+                <element signature="method#ClearInfos#0;class#Noeud#0" expanded="false" />
+                <element signature="class#ChangerCouleur#0;class#Noeud#0" expanded="false" />
+                <element signature="method#run#0;class#ChangerCouleur#0;class#Noeud#0" expanded="false" />
+                <element signature="class#ChangerInfos#0;class#Noeud#0" expanded="false" />
+                <element signature="class#HideInfos#0;class#Noeud#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NotreServeur.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/NotreServeur.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+              <folding>
+                <element signature="method#run#0;class#NotreServeur#0" expanded="false" />
+                <element signature="method#creerServeur#0;class#NotreServeur#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Information.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Information.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+              <folding>
+                <element signature="e#358#364#0" expanded="true" />
+                <element signature="e#1116#1117#0" expanded="true" />
+                <element signature="e#1144#1145#0" expanded="true" />
+                <element signature="method#UpdateStats#0;class#Information#0" expanded="false" />
+                <element signature="method#getOr#0;class#Information#0" expanded="false" />
+                <element signature="method#getDoritos#0;class#Information#0" expanded="false" />
+                <element signature="method#getMountainDew#0;class#Information#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Joueur.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Joueur.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+              <folding>
+                <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
+                <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
+                <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
+                <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
+                <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Carte.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Carte.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="method#AjouterNoeuds#0;class#Carte#0" expanded="false" />
+                <element signature="method#getNoeud#0;class#Carte#0" expanded="false" />
+                <element signature="method#getNoeudIndex#0;class#Carte#0" expanded="false" />
+                <element signature="method#UpdateCarte#0;class#Carte#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -79,15 +202,15 @@
         <option value="$PROJECT_DIR$/src/Informations.java" />
         <option value="$PROJECT_DIR$/src/Dialogue.java" />
         <option value="$PROJECT_DIR$/src/Infos.java" />
-        <option value="$PROJECT_DIR$/src/Information.java" />
         <option value="$PROJECT_DIR$/src/Carte.java" />
         <option value="$PROJECT_DIR$/src/NotreServeur.java" />
         <option value="$PROJECT_DIR$/src/Noeud.java" />
         <option value="$PROJECT_DIR$/src/Question.java" />
-        <option value="$PROJECT_DIR$/src/Joueur.java" />
-        <option value="$PROJECT_DIR$/src/Actions.java" />
         <option value="$PROJECT_DIR$/src/ThreadClient.java" />
+        <option value="$PROJECT_DIR$/src/Information.java" />
+        <option value="$PROJECT_DIR$/src/Joueur.java" />
         <option value="$PROJECT_DIR$/src/Bot.java" />
+        <option value="$PROJECT_DIR$/src/Actions.java" />
         <option value="$PROJECT_DIR$/src/Jeu.java" />
       </list>
     </option>
@@ -130,6 +253,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -164,9 +289,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -527,7 +650,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="151" />
+      <option name="time" value="155" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -542,7 +665,6 @@
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="method#run#0;class#ThreadClient#0" expanded="false" />
-            <element signature="method#updateOr#0;class#ThreadClient#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -559,10 +681,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -572,8 +696,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
           <folding>
-            <element signature="method#Information#0;class#Information#0" expanded="false" />
-            <element signature="method#UpdateInfos#0;class#Information#0" expanded="false" />
+            <element signature="e#358#364#0" expanded="true" />
+            <element signature="e#1116#1117#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="method#UpdateStats#0;class#Information#0" expanded="false" />
+            <element signature="method#getOr#0;class#Information#0" expanded="false" />
+            <element signature="method#getDoritos#0;class#Information#0" expanded="false" />
+            <element signature="method#getMountainDew#0;class#Information#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -600,17 +729,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -640,15 +763,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="34" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="34" />
           <folding>
-            <element signature="method#Actions#0;class#Actions#0" expanded="false" />
             <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
-            <element signature="method#UpdateStats#0;class#Actions#0" expanded="false" />
+            <element signature="method#botClic#0;class#Actions#0" expanded="false" />
             <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
-            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
-            <element signature="method#getDoritos#0;class#Actions#0" expanded="false" />
-            <element signature="method#getMountainDew#0;class#Actions#0" expanded="false" />
             <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
             <element signature="method#youWin#0;class#Actions#0" expanded="false" />
+            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -658,10 +778,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
           <folding>
-            <element signature="method#Show#0;class#Question#0" expanded="false" />
-            <element signature="method#updateOr#0;class#Question#0" expanded="false" />
             <element signature="method#getGold#0;class#Question#0" expanded="false" />
-            <element signature="method#youLose#0;class#Question#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -678,10 +795,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -708,17 +827,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -741,15 +854,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="34" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="34" />
           <folding>
-            <element signature="method#Actions#0;class#Actions#0" expanded="false" />
             <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
-            <element signature="method#UpdateStats#0;class#Actions#0" expanded="false" />
+            <element signature="method#botClic#0;class#Actions#0" expanded="false" />
             <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
-            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
-            <element signature="method#getDoritos#0;class#Actions#0" expanded="false" />
-            <element signature="method#getMountainDew#0;class#Actions#0" expanded="false" />
             <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
             <element signature="method#youWin#0;class#Actions#0" expanded="false" />
+            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -759,10 +869,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
           <folding>
-            <element signature="method#Show#0;class#Question#0" expanded="false" />
-            <element signature="method#updateOr#0;class#Question#0" expanded="false" />
             <element signature="method#getGold#0;class#Question#0" expanded="false" />
-            <element signature="method#youLose#0;class#Question#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -779,10 +886,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -809,17 +918,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -842,15 +945,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="97" selection-start-line="7" selection-start-column="97" selection-end-line="7" selection-end-column="97" />
           <folding>
-            <element signature="method#Actions#0;class#Actions#0" expanded="false" />
             <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
-            <element signature="method#UpdateStats#0;class#Actions#0" expanded="false" />
+            <element signature="method#botClic#0;class#Actions#0" expanded="false" />
             <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
-            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
-            <element signature="method#getDoritos#0;class#Actions#0" expanded="false" />
-            <element signature="method#getMountainDew#0;class#Actions#0" expanded="false" />
             <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
             <element signature="method#youWin#0;class#Actions#0" expanded="false" />
+            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -860,10 +960,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
           <folding>
-            <element signature="method#Show#0;class#Question#0" expanded="false" />
-            <element signature="method#updateOr#0;class#Question#0" expanded="false" />
             <element signature="method#getGold#0;class#Question#0" expanded="false" />
-            <element signature="method#youLose#0;class#Question#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -880,10 +977,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -910,17 +1009,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -943,15 +1036,12 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="method#Actions#0;class#Actions#0" expanded="false" />
             <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
-            <element signature="method#UpdateStats#0;class#Actions#0" expanded="false" />
+            <element signature="method#botClic#0;class#Actions#0" expanded="false" />
             <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
-            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
-            <element signature="method#getDoritos#0;class#Actions#0" expanded="false" />
-            <element signature="method#getMountainDew#0;class#Actions#0" expanded="false" />
             <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
             <element signature="method#youWin#0;class#Actions#0" expanded="false" />
+            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -961,10 +1051,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
           <folding>
-            <element signature="method#Show#0;class#Question#0" expanded="false" />
-            <element signature="method#updateOr#0;class#Question#0" expanded="false" />
             <element signature="method#getGold#0;class#Question#0" expanded="false" />
-            <element signature="method#youLose#0;class#Question#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -981,10 +1068,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1018,17 +1107,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1058,10 +1141,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1088,17 +1173,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1128,10 +1207,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1178,72 +1259,27 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Information.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5022157">
-          <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-          <folding>
-            <element signature="method#Information#0;class#Information#0" expanded="false" />
-            <element signature="method#UpdateInfos#0;class#Information#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Carte.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35155097">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="method#AjouterNoeuds#0;class#Carte#0" expanded="false" />
-            <element signature="method#getNoeud#0;class#Carte#0" expanded="false" />
-            <element signature="method#getNoeudIndex#0;class#Carte#0" expanded="false" />
-            <element signature="method#UpdateCarte#0;class#Carte#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Question.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3357271">
-          <caret line="117" column="26" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
-          <folding>
-            <element signature="method#Show#0;class#Question#0" expanded="false" />
-            <element signature="method#updateOr#0;class#Question#0" expanded="false" />
-            <element signature="method#getGold#0;class#Question#0" expanded="false" />
-            <element signature="method#youLose#0;class#Question#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Actions.java">
+    <entry file="file://$PROJECT_DIR$/TPI_Jeu.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="220" column="25" selection-start-line="220" selection-start-column="25" selection-end-line="220" selection-end-column="25" />
-          <folding>
-            <element signature="method#Actions#0;class#Actions#0" expanded="false" />
-            <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
-            <element signature="method#UpdateStats#0;class#Actions#0" expanded="false" />
-            <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
-            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
-            <element signature="method#getDoritos#0;class#Actions#0" expanded="false" />
-            <element signature="method#getMountainDew#0;class#Actions#0" expanded="false" />
-            <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
-            <element signature="method#youWin#0;class#Actions#0" expanded="false" />
-          </folding>
+          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="2" selection-end-column="72" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Noeud.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5477816">
+        <state vertical-scroll-proportion="0.0">
           <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="method#Noeud#0;class#Noeud#0" expanded="false" />
@@ -1261,37 +1297,56 @@
     <entry file="file://$PROJECT_DIR$/src/ThreadClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="4" />
+          <caret line="112" column="21" selection-start-line="112" selection-start-column="21" selection-end-line="112" selection-end-column="21" />
           <folding>
             <element signature="method#run#0;class#ThreadClient#0" expanded="false" />
-            <element signature="method#updateOr#0;class#ThreadClient#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Question.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="method#getGold#0;class#Question#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Joueur.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34641638">
-          <caret line="21" column="40" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding>
-            <element signature="e#423#432#0" expanded="true" />
             <element signature="method#Joueur#0;class#Joueur#0" expanded="false" />
-            <element signature="method#seDeplacer#0;class#Joueur#0" expanded="false" />
-            <element signature="method#EnvoyerDeplacement#0;class#Joueur#0" expanded="false" />
             <element signature="method#setPosition#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerTroll#0;class#Joueur#0" expanded="false" />
-            <element signature="method#payerGobelin#0;class#Joueur#0" expanded="false" />
             <element signature="method#getGold#0;class#Joueur#0" expanded="false" />
             <element signature="method#getDoritos#0;class#Joueur#0" expanded="false" />
             <element signature="method#getMountainDew#0;class#Joueur#0" expanded="false" />
-            <element signature="method#youLose#0;class#Joueur#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Information.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+          <folding>
+            <element signature="e#358#364#0" expanded="true" />
+            <element signature="e#1116#1117#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="method#UpdateStats#0;class#Information#0" expanded="false" />
+            <element signature="method#getOr#0;class#Information#0" expanded="false" />
+            <element signature="method#getDoritos#0;class#Information#0" expanded="false" />
+            <element signature="method#getMountainDew#0;class#Information#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/NotreServeur.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26109216">
+        <state vertical-scroll-proportion="0.0">
           <caret line="46" column="5" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
           <folding>
             <element signature="method#run#0;class#NotreServeur#0" expanded="false" />
@@ -1300,29 +1355,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TPI_Jeu.iml">
+    <entry file="file://$PROJECT_DIR$/src/Carte.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="38" selection-start-line="0" selection-start-column="38" selection-end-line="2" selection-end-column="72" />
-          <folding />
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="method#AjouterNoeuds#0;class#Carte#0" expanded="false" />
+            <element signature="method#getNoeud#0;class#Carte#0" expanded="false" />
+            <element signature="method#getNoeudIndex#0;class#Carte#0" expanded="false" />
+            <element signature="method#UpdateCarte#0;class#Carte#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Bot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding>
-            <element signature="e#394#401#0" expanded="true" />
-            <element signature="e#461#468#0" expanded="true" />
+            <element signature="method#essayerConstruire#0;class#Bot#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Actions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+          <folding>
+            <element signature="method#gererClic#0;class#Actions#0" expanded="false" />
+            <element signature="method#botClic#0;class#Actions#0" expanded="false" />
+            <element signature="class#AfficherResultatConstruire#0;class#Actions#0" expanded="false" />
+            <element signature="method#verifierGagner#0;class#Actions#0" expanded="false" />
+            <element signature="method#youWin#0;class#Actions#0" expanded="false" />
+            <element signature="method#getOr#0;class#Actions#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Jeu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5716396">
-          <caret line="146" column="29" selection-start-line="146" selection-start-column="29" selection-end-line="146" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.47267357">
+          <caret line="180" column="30" selection-start-line="180" selection-start-column="30" selection-end-line="180" selection-end-column="30" />
           <folding>
             <element signature="class#ContenuNoeuds#0;class#Jeu#0" expanded="false" />
             <element signature="method#run#0;class#ContenuNoeuds#0;class#Jeu#0" expanded="false" />
@@ -1331,10 +1405,12 @@
             <element signature="method#ouvrirConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#fermerConnection#0;class#Jeu#0" expanded="false" />
             <element signature="method#Identification#0;class#Jeu#0" expanded="false" />
-            <element signature="class#4867:4962" expanded="false" />
+            <element signature="class#4861:4956" expanded="false" />
             <element signature="method#Quitter#0;class#Jeu#0" expanded="false" />
             <element signature="method#initCommandes#0;class#Jeu#0" expanded="false" />
             <element signature="method#ResetQuestions#0;class#Jeu#0" expanded="false" />
+            <element signature="method#ResetStats#0;class#Jeu#0" expanded="false" />
+            <element signature="method#startBot#0;class#Jeu#0" expanded="false" />
           </folding>
         </state>
       </provider>

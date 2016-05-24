@@ -49,7 +49,6 @@ public class Joueur {
                 cStat.setInt(1, 1);
                 cStat.executeUpdate();
             } else if (ligne.contains("IP")) {
-                System.out.println(ligne);
                 ipProprietaire = ligne.substring(3);
                 new Question().Show(ipProprietaire);
             } else if (ligne.equals("T")) {
@@ -63,7 +62,7 @@ public class Joueur {
                 Jeu.writerCommandes.flush();
                 noeudCible = new Carte().getNoeud(Integer.parseInt(Jeu.readerCommandes.readLine()));
             }
-            Jeu.actions.UpdateStats();
+            Jeu.infos.UpdateStats();
             if (cStat != null) {
                 cStat.clearParameters();
                 cStat.close();
@@ -100,7 +99,7 @@ public class Joueur {
                 Jeu.writerCommandes.flush();
                 Jeu.readerCommandes.readLine();
             } else youLose();
-            Jeu.actions.UpdateStats();
+            Jeu.infos.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
                 cStat.close();
@@ -126,7 +125,7 @@ public class Joueur {
                 Jeu.writerCommandes.flush();
                 Jeu.readerCommandes.readLine();
             } else youLose();
-            Jeu.actions.UpdateStats();
+            Jeu.infos.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
                 cStat.close();
@@ -183,7 +182,7 @@ public class Joueur {
     }
 
     private void youLose(){
-        if(!Jeu.isBot) {
+        if(!Jeu.bot.isWorking) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Oh non!");
             alert.setHeaderText("Vous avez perdu!");

@@ -34,7 +34,7 @@ public class Question {
                 else if (!ligne.equals("")) contenu.add(ligne);
                 else estVide = true;
             }
-            if(!Jeu.isBot) {
+            if(!Jeu.bot.isWorking) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Question");
                 // La question
@@ -91,7 +91,7 @@ public class Question {
                 cStat.executeUpdate();
             } else youLose();
 
-            Jeu.actions.UpdateStats();
+            Jeu.infos.UpdateStats();
             if(cStat != null){
                 cStat.clearParameters();
                 cStat.close();
@@ -116,7 +116,7 @@ public class Question {
     }
 
     private void youLose(){
-        if(!Jeu.isBot) {
+        if(!Jeu.bot.isWorking) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Oh non!");
             alert.setHeaderText("Vous avez perdu!");

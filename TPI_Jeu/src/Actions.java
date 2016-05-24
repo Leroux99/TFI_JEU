@@ -15,24 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Actions {
-    private List<Text> infos = new ArrayList<Text>();
-    private Text or = new Text(1021, 796, null);
-    private Text doritos = new Text(1021, 826, null);
-    private Text mountaindew = new Text(1021, 856, null);
     private Rectangle construire = new Rectangle();
     private Text construire_text = new Text("Construire");
-    private Text resultatConstruire = new Text(1171, 796, null);
+    private Text resultatConstruire = new Text(1050, 828, null);
+    private Rectangle bot_button = new Rectangle();
+    private Text bot_text = new Text("Bot");
     private final int PAUSE = 3000;
     public final int PRIXBATIMENT = 3;
 
     public Actions() {
-        UpdateStats();
-
-        infos.add(or);
-        infos.add(doritos);
-        infos.add(mountaindew);
-
-        for (Text t : infos) t.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 
         construire.setX(1398);
         construire.setY(795);
@@ -52,10 +43,22 @@ public class Actions {
 
         resultatConstruire.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         resultatConstruire.setVisible(false);
-    }
 
-    public List<Text> getInfos() {
-        return infos;
+        bot_button.setX(1198);
+        bot_button.setY(795);
+        bot_button.setHeight(59);
+        bot_button.setWidth(179);
+        bot_button.setStroke(Color.GRAY);
+        bot_button.setFill(Color.LIGHTGRAY);
+        bot_button.setStrokeWidth(2);
+        bot_button.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> botClic(e));
+        bot_button.setCursor(Cursor.HAND);
+
+        bot_text.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        bot_text.setX(1272);
+        bot_text.setY(828);
+        bot_text.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> botClic(e));
+        bot_text.setCursor(Cursor.HAND);
     }
 
     public Rectangle getConstruire() {
@@ -70,12 +73,20 @@ public class Actions {
         return resultatConstruire;
     }
 
+    public Rectangle getBot_button(){
+        return bot_button;
+    }
+
+    public Text getBot_text(){
+        return bot_text;
+    }
+
     public void gererClic(MouseEvent e) {
         CallableStatement cStat = null;
         String ligne;
         try {
             if (!Jeu.joueur.Position.Constructible){
-                resultatConstruire.setText("Noeud non constructible");
+                resultatConstruire.setText("Noeud non \r\nconstructible");
                 new AfficherResultatConstruire().start();
             }
             else if(getOr() >= PRIXBATIMENT) {
@@ -86,33 +97,33 @@ public class Actions {
                     cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Auberge(?)}");
                     cStat.setInt(1, 1);
                     cStat.executeUpdate();
-                    resultatConstruire.setText("AUBERGE AJOUTÉ !");
+                    resultatConstruire.setText("AUBERGE \r\nAJOUTÉ !");
                     new AfficherResultatConstruire().start();
                 } else if (ligne.equals("MAN")) {
                     cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Manoire(?)}");
                     cStat.setInt(1, 1);
                     cStat.executeUpdate();
-                    resultatConstruire.setText("MANOIR AJOUTÉ !");
+                    resultatConstruire.setText("MANOIR \r\nAJOUTÉ !");
                     new AfficherResultatConstruire().start();
                 } else if (ligne.equals("CHA")) {
                     cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Chateaux(?)}");
                     cStat.setInt(1, 1);
                     cStat.executeUpdate();
-                    resultatConstruire.setText("CHATEAU AJOUTÉ !");
+                    resultatConstruire.setText("CHATEAU \r\nAJOUTÉ !");
                     new AfficherResultatConstruire().start();
                 }
                 if(!ligne.equals("ERR")){
                     cStat = Jeu.CONNEXION.prepareCall(" {call TP_ORDRAGON.Update_Or(?)}");
                     cStat.setInt(1, -PRIXBATIMENT);
                     cStat.executeUpdate();
-                    UpdateStats();
+                    Jeu.infos.UpdateStats();
                     Boolean isAdded = false;
                     for(Integer ID : Jeu.joueur.listeBatiments) if(Jeu.joueur.Position.ID == ID) isAdded = true;
                     if(!isAdded) Jeu.joueur.listeBatiments.add(Jeu.joueur.Position.ID);
                     if(verifierGagner()) youWin();
                 }
                 else{
-                    resultatConstruire.setText("Impossible de construire!");
+                    resultatConstruire.setText("Impossible \r\nde \r\nconstruire!");
                     new AfficherResultatConstruire().start();
                 }
                 if (cStat != null) {
@@ -132,10 +143,13 @@ public class Actions {
         }
     }
 
-    public void UpdateStats(){
-            or.setText("Or: " + getOr());
-            mountaindew.setText("Mountain Dew: " + getMountainDew());
-            doritos.setText("Doritos: " + getDoritos());
+    public void botClic(MouseEvent e){
+        if(Jeu.bot == null) Jeu.startBot();
+        else{
+            if(Jeu.bot.actif == true) Jeu.bot.actif = false;
+            else Jeu.startBot();
+        }
+
     }
 
     class AfficherResultatConstruire extends Thread{
@@ -150,54 +164,6 @@ public class Actions {
             }
             resultatConstruire.setVisible(false);
         }
-    }
-
-    public Integer getOr(){
-        CallableStatement cStat;
-        Integer orAmount = 0;
-        try{
-            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Or()}");
-            cStat.registerOutParameter(1, OracleTypes.INTEGER);
-            cStat.execute();
-            orAmount = cStat.getInt(1);
-            cStat.clearParameters();
-            cStat.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return orAmount;
-    }
-
-    private Integer getDoritos(){
-        CallableStatement cStat;
-        Integer doritosAmount = 0;
-        try{
-            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Doritos()}");
-            cStat.registerOutParameter(1, OracleTypes.INTEGER);
-            cStat.execute();
-            doritosAmount = cStat.getInt(1);
-            cStat.clearParameters();
-            cStat.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return doritosAmount;
-    }
-
-    private Integer getMountainDew(){
-        CallableStatement cStat;
-        Integer mountaindewAmount = 0;
-        try{
-            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_MountainDew()}");
-            cStat.registerOutParameter(1, OracleTypes.INTEGER);
-            cStat.execute();
-            mountaindewAmount = cStat.getInt(1);
-            cStat.clearParameters();
-            cStat.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return mountaindewAmount;
     }
 
     private Boolean verifierGagner(){
@@ -219,7 +185,7 @@ public class Actions {
     }
 
     private void youWin(){
-        if(!Jeu.isBot) {
+        if(!Jeu.bot.isWorking) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Yay!");
             alert.setHeaderText("Vous avez gagné!");
@@ -229,4 +195,21 @@ public class Actions {
 
         System.exit(1);
     }
+
+    public Integer getOr(){
+        CallableStatement cStat;
+        Integer orAmount = 0;
+        try{
+            cStat = Jeu.CONNEXION.prepareCall(" {? = call TP_ORDRAGON.Afficher_Or()}");
+            cStat.registerOutParameter(1, OracleTypes.INTEGER);
+            cStat.execute();
+            orAmount = cStat.getInt(1);
+            cStat.clearParameters();
+            cStat.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return orAmount;
+    }
+
 }
