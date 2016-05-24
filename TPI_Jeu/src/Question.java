@@ -12,8 +12,6 @@ public class Question {
     private final int PRIXOR = 2;
 
     public void Show(String ipProprietaire) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Question");
         CallableStatement cStat = null;
         Socket Soc_Proprietaire;
         final int portProprietaire = 1666;
@@ -36,37 +34,39 @@ public class Question {
                 else if (!ligne.equals("")) contenu.add(ligne);
                 else estVide = true;
             }
+            if(!Jeu.isBot) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Question");
+                // La question
+                alert.setHeaderText(contenu.get(0));
 
-        // La question
-        alert.setHeaderText(contenu.get(0));
+                StringBuffer reponses = new StringBuffer();
+                reponses.append(contenu.get(1) + "\r\n");
+                reponses.append(contenu.get(2) + "\r\n");
+                reponses.append(contenu.get(3) + "\r\n");
+                reponses.append(contenu.get(4) + "\r\n");
 
-        StringBuffer reponses = new StringBuffer();
-        reponses.append(contenu.get(1) + "\r\n");
-        reponses.append(contenu.get(2) + "\r\n");
-        reponses.append(contenu.get(3) + "\r\n");
-        reponses.append(contenu.get(4) + "\r\n");
+                alert.setContentText(reponses.toString());
 
-        alert.setContentText(reponses.toString());
+                ButtonType buttonType1 = new ButtonType("1");
+                ButtonType buttonType2 = new ButtonType("2");
+                ButtonType buttonType3 = new ButtonType("3");
+                ButtonType buttonType4 = new ButtonType("4");
 
-        ButtonType buttonType1 = new ButtonType("1");
-        ButtonType buttonType2 = new ButtonType("2");
-        ButtonType buttonType3 = new ButtonType("3");
-        ButtonType buttonType4 = new ButtonType("4");
+                alert.getButtonTypes().setAll(buttonType1, buttonType2, buttonType3, buttonType4);
 
-        alert.getButtonTypes().setAll(buttonType1, buttonType2, buttonType3, buttonType4);
-
-        Optional<ButtonType> result = alert.showAndWait();
-            // se connecter au proprietaire de l'immeuble
-
-            if (result.get() == buttonType1) {
-                writer.println(1);
-            } else if (result.get() == buttonType2) {
-                writer.println(2);
-            } else if (result.get() == buttonType3) {
-                writer.println(3);
-            } else if (result.get() == buttonType4) {
-                writer.println(4);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == buttonType1) {
+                    writer.println(1);
+                } else if (result.get() == buttonType2) {
+                    writer.println(2);
+                } else if (result.get() == buttonType3) {
+                    writer.println(3);
+                } else if (result.get() == buttonType4) {
+                    writer.println(4);
+                }
             }
+            else writer.println((int) (Math.random() * 4) + 1);
             writer.flush();
 
             ligne = reader.readLine();
@@ -116,11 +116,13 @@ public class Question {
     }
 
     private void youLose(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Oh non!");
-        alert.setHeaderText("Vous avez perdu!");
-        alert.setContentText("Décevant..");
-        alert.showAndWait();
+        if(!Jeu.isBot) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Oh non!");
+            alert.setHeaderText("Vous avez perdu!");
+            alert.setContentText("Décevant..");
+            alert.showAndWait();
+        } else System.out.println("Vous avez perdu!");
         System.exit(1);
     }
 }

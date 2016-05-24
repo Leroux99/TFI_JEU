@@ -23,7 +23,7 @@ public class Actions {
     private Text construire_text = new Text("Construire");
     private Text resultatConstruire = new Text(1171, 796, null);
     private final int PAUSE = 3000;
-    private final int PRIXBATIMENT = 3;
+    public final int PRIXBATIMENT = 3;
 
     public Actions() {
         UpdateStats();
@@ -106,6 +106,9 @@ public class Actions {
                     cStat.setInt(1, -PRIXBATIMENT);
                     cStat.executeUpdate();
                     UpdateStats();
+                    Boolean isAdded = false;
+                    for(Integer ID : Jeu.joueur.listeBatiments) if(Jeu.joueur.Position.ID == ID) isAdded = true;
+                    if(!isAdded) Jeu.joueur.listeBatiments.add(Jeu.joueur.Position.ID);
                     if(verifierGagner()) youWin();
                 }
                 else{
@@ -149,7 +152,7 @@ public class Actions {
         }
     }
 
-    private Integer getOr(){
+    public Integer getOr(){
         CallableStatement cStat;
         Integer orAmount = 0;
         try{
@@ -216,12 +219,13 @@ public class Actions {
     }
 
     private void youWin(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Yay!");
-        alert.setHeaderText("Vous avez gagné!");
-        alert.setContentText(null);
-
-        alert.showAndWait();
+        if(!Jeu.isBot) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Yay!");
+            alert.setHeaderText("Vous avez gagné!");
+            alert.setContentText(null);
+            alert.showAndWait();
+        } else System.out.println("Vous avez gagné!");
 
         System.exit(1);
     }

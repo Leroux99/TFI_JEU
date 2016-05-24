@@ -3,12 +3,16 @@ import oracle.jdbc.OracleTypes;
 import java.io.*;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Joueur {
     public Noeud Position;
     private final int PRIXMOUNTAINDEW = 1;
     private final int PRIXDORITOS = 1;
     private final int PRIXOR = 3;
+
+    public List<Integer> listeBatiments = new ArrayList<Integer>();
 
     Joueur(Noeud noeud) {
         Position = noeud;
@@ -179,11 +183,13 @@ public class Joueur {
     }
 
     private void youLose(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Oh non!");
-        alert.setHeaderText("Vous avez perdu!");
-        alert.setContentText("Décevant..");
-        alert.showAndWait();
+        if(!Jeu.isBot) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Oh non!");
+            alert.setHeaderText("Vous avez perdu!");
+            alert.setContentText("Décevant..");
+            alert.showAndWait();
+        } else System.out.println("Vous avez perdu!");
         System.exit(1);
     }
 }

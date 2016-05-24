@@ -44,6 +44,7 @@ public class ThreadClient implements Runnable {
             if (noeudCible.batiment == Noeud.typebatiment.auberge) cStat.setString(1, "F");
             else if (noeudCible.batiment == Noeud.typebatiment.manoir) cStat.setString(1, "M");
             else if (noeudCible.batiment == Noeud.typebatiment.chateau) cStat.setString(1, "D");
+            else cStat.setString(1, "D"); //si l'autre équipe donne un mauvais noeud, on va les punir avec une question difficile
 
             cStat.registerOutParameter(2, OracleTypes.CURSOR);
             cStat.execute();
@@ -71,7 +72,7 @@ public class ThreadClient implements Runnable {
             cStat.close();
             String ligne = readerLigneClient.readLine();
             while(ligne == null) ligne = readerLigneClient.readLine();
-
+            System.out.println(ligne);
             // Verifier si bonne reponse
             cStat = Jeu.CONNEXION.prepareCall("{? = call TP_ORDRAGON.Verifier_Reponse(?)}");
             cStat.registerOutParameter(1, OracleTypes.INTEGER);

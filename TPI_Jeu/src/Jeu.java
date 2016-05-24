@@ -17,7 +17,7 @@ public class Jeu extends Application {
     final static public int PORT_PROF_COMMANDES = 51007;
     final static public int PORT_PROF_JOUEURS = 51006;
     final static public int PORT_PROF_CARTE = 51005;
-    Carte carte = new Carte(); //notre carte
+    public static Carte carte = new Carte(); //notre carte
     public static Joueur joueur; //Notre joueur (static pour être accessible partout)
     public static Information infos;
     public static Actions actions;
@@ -26,6 +26,7 @@ public class Jeu extends Application {
     public static Socket Serveur_Prof_Commandes;
     public static PrintWriter writerCommandes = null;
     public static BufferedReader readerCommandes = null;
+    public static Boolean isBot = true;
 
     class ContenuNoeuds implements Runnable {
         final private String SEPARATEUR = " ";
@@ -142,6 +143,8 @@ public class Jeu extends Application {
         chargerLePilote();
         initCommandes();
         if (ouvrirConnection()) {
+            ResetStats();
+            ResetQuestions();
             Identification();
             getStartpoint();
             infos = new Information();
@@ -172,6 +175,12 @@ public class Jeu extends Application {
             Thread t2 = new Thread(new NotreServeur());
             t2.setDaemon(true);
             t2.start();
+
+            if(isBot){
+                Thread t3 = new Thread(new Bot());
+                t3.setDaemon(true);
+                t3.start();
+            }
         }
     }
 
@@ -230,5 +239,4 @@ public class Jeu extends Application {
             e.printStackTrace();
         }
     }
-
 }
